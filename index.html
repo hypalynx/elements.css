@@ -4,17 +4,30 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/elements.css" type="text/css" media="all" />
+<style>
+/* Page specific styling */
+main {
+  justify-content: center;
+  align-items: center;
+}
+</style>
 	</head>
 
   <body>
-    <h1>elements.css</h1>
-    <p>Elements is a CSS library that directly styles HTML elements like
-    <code>input</code>. It's designed to be a minimal or zero-configuration
-    addition to a web project to give you a well styled foundation that you can
-    make your own changes to.</p>
-    <div class="flex flex-col">
-      <input type="text"/>
-      <button>Try something new!</button>
-    </div>
+    <main class="flex h-screen">
+      <div>
+        <h1>elements.css</h1>
+        <div class="space-md">
+          <p>Elements is a CSS library that directly styles HTML elements like
+          <code>input</code>. It's designed to be a minimal or zero-configuration
+          addition to a web project to give you a well styled foundation that you can
+          make your own changes to.</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-sm">
+        <input type="text"/>
+        <button>Try something new!</button>
+      </div>
+    </main>
   </body>
 </html>
