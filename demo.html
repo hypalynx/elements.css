@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>elements.css Demo</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="/elements.css" type="text/css" media="all">
+  </head>
+  <body>
+    <aside class="fixed-left w-80 border-r bg-background p-lg flex flex-col gap-sm">
+      <h2>Customize</h2>
+
+      <div class="flex gap-sm">
+        <button id="randomize" class="flex-1">Randomize</button>
+        <button id="reset" class="flex-1">Reset</button>
+      </div>
+
+      <div class="flex flex-col gap-sm" id="controls">
+        <details open>
+          <summary>Colors</summary>
+          <div class="flex flex-col gap-md">
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Primary</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="primary" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="primary" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="primary" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Foreground</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="foreground" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="foreground" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="foreground" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Foreground Faded</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="foreground-faded" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="foreground-faded" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="foreground-faded" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Background</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="background" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="background" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="background" data-channel="h"></label>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Shape</summary>
+          <div class="flex flex-col gap-xs">
+            <label class="text-sm flex gap-sm items-center">Radius <input class="flex-1" type="range" min="0" max="24" step="1" data-var="radius" data-unit="px"> <span data-value="radius">6px</span></label>
+          </div>
+        </details>
+
+        <details>
+          <summary>Spacing</summary>
+          <div class="flex flex-col gap-xs">
+            <label class="text-sm flex gap-sm items-center">Body <input class="flex-1" type="range" min="0.5" max="6" step="0.25" data-var="body-spacing" data-unit="rem"> <span data-value="body-spacing">2rem</span></label>
+            <label class="text-sm flex gap-sm items-center">XS <input class="flex-1" type="range" min="0.125" max="1" step="0.125" data-var="spacing-xs" data-unit="rem"> <span data-value="spacing-xs">0.25rem</span></label>
+            <label class="text-sm flex gap-sm items-center">SM <input class="flex-1" type="range" min="0.25" max="1.5" step="0.125" data-var="spacing-sm" data-unit="rem"> <span data-value="spacing-sm">0.5rem</span></label>
+            <label class="text-sm flex gap-sm items-center">MD <input class="flex-1" type="range" min="0.5" max="2" step="0.125" data-var="spacing-md" data-unit="rem"> <span data-value="spacing-md">1rem</span></label>
+            <label class="text-sm flex gap-sm items-center">LG <input class="flex-1" type="range" min="1" max="3" step="0.125" data-var="spacing-lg" data-unit="rem"> <span data-value="spacing-lg">1.5rem</span></label>
+          </div>
+        </details>
+
+        <details>
+          <summary>Typography</summary>
+          <div class="flex flex-col gap-xs">
+            <label class="text-sm flex gap-sm items-center">Size <input class="flex-1" type="range" min="0.75" max="1.5" step="0.0625" data-var="font-size-base" data-unit="rem"> <span data-value="font-size-base">1rem</span></label>
+            <label class="text-sm flex gap-sm items-center">Line H <input class="flex-1" type="range" min="1.2" max="2" step="0.1" data-var="line-height-base" data-unit=""> <span data-value="line-height-base">1.6</span></label>
+            <label class="text-sm flex gap-sm items-center">Max W <input class="flex-1" type="range" min="45" max="80" step="5" data-var="paragraph-max-width" data-unit="ch" data-prefix="min(" data-suffix=", 100% - 2rem)"> <span data-value="paragraph-max-width">65ch</span></label>
+          </div>
+        </details>
+      </div>
+
+      <div class="flex flex-col gap-xs flex-1">
+        <label class="text-sm">Config</label>
+        <textarea id="config-output" class="text-sm flex-1" readonly></textarea>
+        <button id="copy-config">Copy Config</button>
+      </div>
+    </aside>
+
+    <main class="ml-80 p-lg flex flex-col gap-lg">
+      <h1>elements.css</h1>
+      <p>A CSS framework that styles HTML elements directly. Customize the variables and copy the config into your project.</p>
+
+      <div class="grid grid-cols-3 gap-lg">
+        <div class="card flex flex-col min-h-48" data-component="headings">
+          <h3 class="flex">
+            <span class="flex-1">Headings</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col justify-center" data-preview>
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;h1&gt;Heading 1&lt;/h1&gt;
+&lt;h2&gt;Heading 2&lt;/h2&gt;
+&lt;h3&gt;Heading 3&lt;/h3&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col col-span-2 min-h-48" data-component="paragraph">
+          <h3 class="flex">
+            <span class="flex-1">Paragraph</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center" data-preview>
+            <p>This is a paragraph of text demonstrating the default typography styles. It uses text-wrap: pretty for better line breaks and a comfortable reading width.</p>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;p&gt;This is a paragraph of text...&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="link">
+          <h3 class="flex">
+            <span class="flex-1">Link</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <a href="#">This is a link</a>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;a href="#"&gt;This is a link&lt;/a&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="buttons">
+          <h3 class="flex">
+            <span class="flex-1">Buttons</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center gap-sm" data-preview>
+            <button>Button</button>
+            <button disabled>Disabled</button>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;button&gt;Button&lt;/button&gt;
+&lt;button disabled&gt;Disabled&lt;/button&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="inputs">
+          <h3 class="flex">
+            <span class="flex-1">Inputs</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col items-center justify-center gap-sm" data-preview>
+            <input type="text" placeholder="Text input">
+            <input type="text" placeholder="Disabled" disabled>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;input type="text" placeholder="Text input"&gt;
+&lt;input type="text" disabled&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="textarea">
+          <h3 class="flex">
+            <span class="flex-1">Textarea</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <textarea rows="3" placeholder="Enter text here..." class="w-full"></textarea>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;textarea rows="3"&gt;&lt;/textarea&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="select">
+          <h3 class="flex">
+            <span class="flex-1">Select</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <select>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;select&gt;
+  &lt;option&gt;Option 1&lt;/option&gt;
+  &lt;option&gt;Option 2&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="range">
+          <h3 class="flex">
+            <span class="flex-1">Range</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <input type="range" min="0" max="100" class="w-full">
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;input type="range" min="0" max="100"&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="table">
+          <h3 class="flex">
+            <span class="flex-1">Table</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center" data-preview>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Row 1</td>
+                  <td>Data</td>
+                </tr>
+                <tr>
+                  <td>Row 2</td>
+                  <td>Data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Row 1&lt;/td&gt;&lt;td&gt;Data&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="code">
+          <h3 class="flex">
+            <span class="flex-1">Code</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <p>Inline <code>code</code> styling</p>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;code&gt;code&lt;/code&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="accordion">
+          <h3 class="flex">
+            <span class="flex-1">Accordion</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col justify-center gap-sm" data-preview>
+            <details>
+              <summary>Section 1</summary>
+              <p>Content for section 1</p>
+            </details>
+            <details>
+              <summary>Section 2</summary>
+              <p>Content for section 2</p>
+            </details>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;details&gt;
+  &lt;summary&gt;Section 1&lt;/summary&gt;
+  &lt;p&gt;Content here&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="card">
+          <h3 class="flex">
+            <span class="flex-1">Card</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <div class="card">Card content</div>
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;div class="card"&gt;Card content&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="checkbox">
+          <h3 class="flex">
+            <span class="flex-1">Checkbox</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col items-center justify-center gap-sm" data-preview>
+            <label class="flex items-center gap-sm"><input type="checkbox" checked> Checked</label>
+            <label class="flex items-center gap-sm"><input type="checkbox"> Unchecked</label>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;label class="flex items-center gap-sm"&gt;
+  &lt;input type="checkbox"&gt; Label
+&lt;/label&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="radio">
+          <h3 class="flex">
+            <span class="flex-1">Radio</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col items-center justify-center gap-sm" data-preview>
+            <label class="flex items-center gap-sm"><input type="radio" name="demo" checked> Option 1</label>
+            <label class="flex items-center gap-sm"><input type="radio" name="demo"> Option 2</label>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;label class="flex items-center gap-sm"&gt;
+  &lt;input type="radio" name="group"&gt; Option
+&lt;/label&gt;</code></pre>
+        </div>
+
+        <div class="card flex flex-col min-h-48" data-component="dialog">
+          <h3 class="flex">
+            <span class="flex-1">Dialog</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <button onclick="document.getElementById('demo-dialog').showModal()">Open Dialog</button>
+            <dialog id="demo-dialog">
+              <h3>Dialog Title</h3>
+              <p>This is a native HTML dialog element with backdrop blur.</p>
+              <div class="flex gap-sm justify-center">
+                <button onclick="document.getElementById('demo-dialog').close()">Close</button>
+              </div>
+            </dialog>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;dialog id="my-dialog"&gt;
+  &lt;h3&gt;Title&lt;/h3&gt;
+  &lt;p&gt;Content&lt;/p&gt;
+  &lt;button onclick="this.closest('dialog').close()"&gt;
+    Close
+  &lt;/button&gt;
+&lt;/dialog&gt;
+&lt;button onclick="document.getElementById('my-dialog').showModal()"&gt;
+  Open
+&lt;/button&gt;</code></pre>
+        </div>
+      </div>
+
+      <footer class="text-sm" style="opacity: 0.6; margin-top: var(--spacing-lg);">
+        Icons by <a href="https://phosphoricons.com" target="_blank">Phosphor Icons</a> (MIT License)
+      </footer>
+    </main>
+
+    <script>
+      const colors = {
+        'primary': { l: 0.6, c: 0.15, h: 250 },
+        'foreground': { l: 0.25, c: 0.02, h: 250 },
+        'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
+        'background': { l: 0.985, c: 0.005, h: 250 }
+      };
+
+      const vars = {
+        'radius': { value: 6, unit: 'px' },
+        'body-spacing': { value: 2, unit: 'rem' },
+        'spacing-xs': { value: 0.25, unit: 'rem' },
+        'spacing-sm': { value: 0.5, unit: 'rem' },
+        'spacing-md': { value: 1, unit: 'rem' },
+        'spacing-lg': { value: 1.5, unit: 'rem' },
+        'font-size-base': { value: 1, unit: 'rem' },
+        'line-height-base': { value: 1.6, unit: '' },
+        'paragraph-max-width': { value: 65, unit: 'ch', prefix: 'min(', suffix: ', 100% - 2rem)' }
+      };
+
+      function updateCSSVariable(name, value) {
+        document.documentElement.style.setProperty(`--${name}`, value);
+      }
+
+      function oklchString(l, c, h) {
+        return `oklch(${l.toFixed(4)} ${c.toFixed(4)} ${h.toFixed(0)})`;
+      }
+
+      function varString(name) {
+        const v = vars[name];
+        const val = `${v.value}${v.unit}`;
+        if (v.prefix) return `${v.prefix}${val}${v.suffix || ''}`;
+        return val;
+      }
+
+      function updateAllColors() {
+        for (const colorName of Object.keys(colors)) {
+          const color = colors[colorName];
+          updateCSSVariable(colorName, oklchString(color.l, color.c, color.h));
+        }
+        updatePrimaryContent();
+        updateConfig();
+      }
+
+      function updatePrimaryContent() {
+        const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
+        updateCSSVariable('primary-content', oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h));
+      }
+
+      function updateVar(name) {
+        const v = vars[name];
+        const val = varString(name);
+        updateCSSVariable(name, val);
+        const display = document.querySelector(`[data-value="${name}"]`);
+        if (display) display.textContent = `${v.value}${v.unit}`;
+        updateConfig();
+      }
+
+      function updateConfig() {
+        const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
+        const config = `:root {
+  /* Colors */
+  --primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
+  --primary-content: ${oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h)};
+  --foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
+  --foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
+  --background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
+
+  /* Spacing */
+  --spacing-xs: ${varString('spacing-xs')};
+  --spacing-sm: ${varString('spacing-sm')};
+  --spacing-md: ${varString('spacing-md')};
+  --spacing-lg: ${varString('spacing-lg')};
+  --body-spacing: ${varString('body-spacing')};
+
+  /* Shape */
+  --radius: ${varString('radius')};
+
+  /* Typography */
+  --font-size-base: ${varString('font-size-base')};
+  --line-height-base: ${varString('line-height-base')};
+  --paragraph-max-width: ${varString('paragraph-max-width')};
+}`;
+        document.getElementById('config-output').value = config;
+      }
+
+      function initSliders() {
+        // Color sliders
+        for (const [colorName, color] of Object.entries(colors)) {
+          const lSlider = document.querySelector(`input[data-color="${colorName}"][data-channel="l"]`);
+          const cSlider = document.querySelector(`input[data-color="${colorName}"][data-channel="c"]`);
+          const hSlider = document.querySelector(`input[data-color="${colorName}"][data-channel="h"]`);
+
+          if (lSlider) lSlider.value = color.l;
+          if (cSlider) cSlider.value = color.c;
+          if (hSlider) hSlider.value = color.h;
+        }
+
+        // Var sliders
+        for (const [name, v] of Object.entries(vars)) {
+          const slider = document.querySelector(`input[data-var="${name}"]`);
+          if (slider) slider.value = v.value;
+          const display = document.querySelector(`[data-value="${name}"]`);
+          if (display) display.textContent = `${v.value}${v.unit}`;
+        }
+      }
+
+      function randomize() {
+        const primaryHue = Math.random() * 360;
+
+        colors['primary'].l = 0.5 + Math.random() * 0.2;
+        colors['primary'].c = 0.12 + Math.random() * 0.12;
+        colors['primary'].h = primaryHue;
+
+        const isDarkMode = Math.random() > 0.6;
+
+        if (isDarkMode) {
+          colors['background'].l = 0.12 + Math.random() * 0.1;
+          colors['foreground'].l = 0.88 + Math.random() * 0.08;
+          colors['foreground-faded'].l = 0.5 + Math.random() * 0.12;
+        } else {
+          colors['background'].l = 0.94 + Math.random() * 0.05;
+          colors['foreground'].l = 0.18 + Math.random() * 0.12;
+          colors['foreground-faded'].l = 0.45 + Math.random() * 0.15;
+        }
+
+        const tintBackground = Math.random() > 0.4;
+        if (tintBackground) {
+          colors['background'].c = Math.random() * 0.025;
+          colors['background'].h = primaryHue;
+        } else {
+          colors['background'].c = 0;
+          colors['background'].h = 0;
+        }
+
+        colors['foreground'].c = Math.random() * 0.02;
+        colors['foreground'].h = Math.random() > 0.5 ? primaryHue : 0;
+        colors['foreground-faded'].c = colors['foreground'].c;
+        colors['foreground-faded'].h = colors['foreground'].h;
+
+        vars['radius'].value = Math.floor(Math.random() * 12) + 2;
+
+        initSliders();
+        updateAllColors();
+        for (const name of Object.keys(vars)) {
+          updateVar(name);
+        }
+      }
+
+      const defaults = {
+        colors: {
+          'primary': { l: 0.6, c: 0.15, h: 250 },
+          'foreground': { l: 0.25, c: 0.02, h: 250 },
+          'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
+          'background': { l: 0.985, c: 0.005, h: 250 }
+        },
+        vars: {
+          'radius': 6,
+          'body-spacing': 2,
+          'spacing-xs': 0.25,
+          'spacing-sm': 0.5,
+          'spacing-md': 1,
+          'spacing-lg': 1.5,
+          'font-size-base': 1,
+          'line-height-base': 1.6,
+          'paragraph-max-width': 65
+        }
+      };
+
+      function reset() {
+        // Reset colors
+        for (const [name, val] of Object.entries(defaults.colors)) {
+          colors[name].l = val.l;
+          colors[name].c = val.c;
+          colors[name].h = val.h;
+        }
+
+        // Reset vars
+        for (const [name, val] of Object.entries(defaults.vars)) {
+          vars[name].value = val;
+        }
+
+        initSliders();
+        updateAllColors();
+        for (const name of Object.keys(vars)) {
+          updateVar(name);
+        }
+      }
+
+      // Color slider listeners
+      document.querySelectorAll('input[data-color]').forEach(slider => {
+        slider.addEventListener('input', (e) => {
+          const colorName = e.target.dataset.color;
+          const channel = e.target.dataset.channel;
+          colors[colorName][channel] = parseFloat(e.target.value);
+          updateCSSVariable(colorName, oklchString(colors[colorName].l, colors[colorName].c, colors[colorName].h));
+          if (colorName === 'primary') updatePrimaryContent();
+          updateConfig();
+        });
+      });
+
+      // Var slider listeners
+      document.querySelectorAll('input[data-var]').forEach(slider => {
+        slider.addEventListener('input', (e) => {
+          const name = e.target.dataset.var;
+          vars[name].value = parseFloat(e.target.value);
+          updateVar(name);
+        });
+      });
+
+      // Copy config
+      document.getElementById('copy-config').addEventListener('click', () => {
+        const config = document.getElementById('config-output').value;
+        navigator.clipboard.writeText(config).then(() => {
+          const btn = document.getElementById('copy-config');
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = original, 1500);
+        });
+      });
+
+      // Randomize & Reset
+      document.getElementById('randomize').addEventListener('click', randomize);
+      document.getElementById('reset').addEventListener('click', reset);
+
+      // Toggle code/preview
+      document.querySelectorAll('[data-toggle-code]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const card = link.closest('[data-component]');
+          const preview = card.querySelector('[data-preview]');
+          const code = card.querySelector('[data-code]');
+          const showingCode = !code.classList.contains('hidden');
+
+          if (showingCode) {
+            code.classList.add('hidden');
+            preview.classList.remove('hidden');
+            link.textContent = 'show code';
+          } else {
+            code.classList.remove('hidden');
+            preview.classList.add('hidden');
+            link.textContent = 'hide code';
+          }
+        });
+      });
+
+      // Copy code on click
+      document.querySelectorAll('[data-code] code').forEach(codeBlock => {
+        codeBlock.classList.add('cursor-pointer');
+        codeBlock.addEventListener('click', () => {
+          navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+            const original = codeBlock.textContent;
+            codeBlock.textContent = 'Copied!';
+            setTimeout(() => codeBlock.textContent = original, 1000);
+          });
+        });
+      });
+
+      // Initialize
+      initSliders();
+      updateConfig();
+    </script>
+  </body>
+</html>
