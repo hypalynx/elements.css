@@ -28,10 +28,14 @@
   --input-spacing: 0.5rem 0.75rem;
   --paragraph-max-width: min(65ch, 100% - 2rem);
   --radius: 6px;
+  --border-width: 1px;
 
   /* Typography */
   --font-size-base: 1rem;
   --line-height-base: 1.6;
+
+  /* Shadows */
+  --shadow-color: oklch(0 0 0 / 0.1);
 }
 
 /* Layout */
@@ -114,7 +118,7 @@ input:not(.unstyled):not([type="range"]):not([type="checkbox"]):not([type="radio
 textarea:not(.unstyled),
 select:not(.unstyled) {
   background: var(--background);
-  border: 1px solid var(--foreground-faded);
+  border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   padding: var(--input-spacing);
   font-family: inherit;
@@ -219,7 +223,7 @@ input[type="radio"]:not(.unstyled) {
   appearance: none;
   width: 1.25rem;
   height: 1.25rem;
-  border: 2px solid var(--foreground-faded);
+  border: calc(var(--border-width) * 2) solid var(--foreground-faded);
   background: var(--background);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
@@ -262,7 +266,7 @@ input[type="radio"]:not(.unstyled):focus-visible {
 
 /* Dialog/Modal */
 dialog:not(.unstyled) {
-  border: 1px solid var(--foreground-faded);
+  border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   padding: var(--spacing-lg);
   background: var(--background);
@@ -288,14 +292,14 @@ dialog:not(.unstyled) h3 {
 
 /* Cards */
 .card {
-  border: 1px solid var(--foreground-faded);
+  border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   padding: var(--spacing-md);
 }
 
 /* Accordion (details/summary) */
 details:not(.unstyled) {
-  border: 1px solid var(--foreground-faded);
+  border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   overflow: hidden;
 }
@@ -354,14 +358,14 @@ table:not(.unstyled) {
 
 table:not(.unstyled) th {
   padding: var(--spacing-sm) var(--spacing-md);
-  border-bottom: 2px solid var(--foreground-faded);
+  border-bottom: calc(var(--border-width) * 2) solid var(--foreground-faded);
   text-align: left;
   font-weight: 600;
 }
 
 table:not(.unstyled) td {
   padding: var(--spacing-sm) var(--spacing-md);
-  border-bottom: 1px solid oklch(from var(--foreground-faded) l c h / 0.3);
+  border-bottom: var(--border-width) solid oklch(from var(--foreground-faded) l c h / 0.3);
   text-align: left;
 }
 
@@ -492,7 +496,7 @@ svg:not(.unstyled) {
 }
 
 .border-r {
-  border-right: 1px solid var(--foreground-faded);
+  border-right: var(--border-width) solid var(--foreground-faded);
 }
 
 .bg-background {
@@ -525,4 +529,25 @@ svg:not(.unstyled) {
 
 .min-h-48 {
   min-height: 12rem;
+}
+
+/* Shadow utilities */
+.shadow-sm {
+  box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px var(--shadow-color), 0 2px 4px var(--shadow-color);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px var(--shadow-color), 0 4px 6px var(--shadow-color);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px var(--shadow-color), 0 8px 10px var(--shadow-color);
+}
+
+.shadow-none {
+  box-shadow: none;
 }

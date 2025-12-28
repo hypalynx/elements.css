@@ -13,8 +13,16 @@
       <h2>Customize</h2>
 
       <div class="flex gap-sm">
-        <button id="randomize" class="flex-1">Randomize</button>
-        <button id="reset" class="flex-1">Reset</button>
+        <select id="presets" class="flex-1">
+          <option value="">Presets</option>
+          <option value="default">Default</option>
+          <option value="minimal">Minimal</option>
+          <option value="rounded">Rounded</option>
+          <option value="sharp">Sharp</option>
+          <option value="dark">Dark</option>
+        </select>
+        <button id="randomize">Random</button>
+        <button id="reset">Reset</button>
       </div>
 
       <div class="flex flex-col gap-sm" id="controls">
@@ -49,9 +57,17 @@
         </details>
 
         <details>
-          <summary>Shape</summary>
+          <summary>Border</summary>
           <div class="flex flex-col gap-xs">
+            <label class="text-sm flex gap-sm items-center">Width <input class="flex-1" type="range" min="0" max="3" step="1" data-var="border-width" data-unit="px"> <span data-value="border-width">1px</span></label>
             <label class="text-sm flex gap-sm items-center">Radius <input class="flex-1" type="range" min="0" max="24" step="1" data-var="radius" data-unit="px"> <span data-value="radius">6px</span></label>
+          </div>
+        </details>
+
+        <details>
+          <summary>Shadows</summary>
+          <div class="flex flex-col gap-xs">
+            <label class="text-sm flex gap-sm items-center">Opacity <input class="flex-1" type="range" min="0" max="0.3" step="0.01" data-var="shadow-opacity" data-unit=""> <span data-value="shadow-opacity">0.1</span></label>
           </div>
         </details>
 
@@ -88,7 +104,7 @@
       <p>A CSS framework that styles HTML elements directly. Customize the variables and copy the config into your project.</p>
 
       <div class="grid grid-cols-3 gap-lg">
-        <div class="card flex flex-col min-h-48" data-component="headings">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="headings">
           <h3 class="flex">
             <span class="flex-1">Headings</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -103,7 +119,7 @@
 &lt;h3&gt;Heading 3&lt;/h3&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col col-span-2 min-h-48" data-component="paragraph">
+        <div class="card shadow-md flex flex-col col-span-2 min-h-48" data-component="paragraph">
           <h3 class="flex">
             <span class="flex-1">Paragraph</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -114,7 +130,7 @@
           <pre class="hidden flex-1 flex items-center" data-code><code>&lt;p&gt;This is a paragraph of text...&lt;/p&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="link">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="link">
           <h3 class="flex">
             <span class="flex-1">Link</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -125,7 +141,7 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;a href="#"&gt;This is a link&lt;/a&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="buttons">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="buttons">
           <h3 class="flex">
             <span class="flex-1">Buttons</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -138,7 +154,7 @@
 &lt;button disabled&gt;Disabled&lt;/button&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="inputs">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="inputs">
           <h3 class="flex">
             <span class="flex-1">Inputs</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -151,7 +167,7 @@
 &lt;input type="text" disabled&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="textarea">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="textarea">
           <h3 class="flex">
             <span class="flex-1">Textarea</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -162,7 +178,7 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;textarea rows="3"&gt;&lt;/textarea&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="select">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="select">
           <h3 class="flex">
             <span class="flex-1">Select</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -180,7 +196,7 @@
 &lt;/select&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="range">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="range">
           <h3 class="flex">
             <span class="flex-1">Range</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -191,7 +207,7 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;input type="range" min="0" max="100"&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="table">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="table">
           <h3 class="flex">
             <span class="flex-1">Table</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -226,7 +242,7 @@
 &lt;/table&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="code">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="code">
           <h3 class="flex">
             <span class="flex-1">Code</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -237,7 +253,7 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;code&gt;code&lt;/code&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="accordion">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="accordion">
           <h3 class="flex">
             <span class="flex-1">Accordion</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -258,7 +274,7 @@
 &lt;/details&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="card">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="card">
           <h3 class="flex">
             <span class="flex-1">Card</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -269,7 +285,7 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;div class="card"&gt;Card content&lt;/div&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="checkbox">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="checkbox">
           <h3 class="flex">
             <span class="flex-1">Checkbox</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -283,7 +299,7 @@
 &lt;/label&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="radio">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="radio">
           <h3 class="flex">
             <span class="flex-1">Radio</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -297,7 +313,7 @@
 &lt;/label&gt;</code></pre>
         </div>
 
-        <div class="card flex flex-col min-h-48" data-component="dialog">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="dialog">
           <h3 class="flex">
             <span class="flex-1">Dialog</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -339,7 +355,9 @@
       };
 
       const vars = {
+        'border-width': { value: 1, unit: 'px' },
         'radius': { value: 6, unit: 'px' },
+        'shadow-opacity': { value: 0.1, unit: '' },
         'body-spacing': { value: 2, unit: 'rem' },
         'spacing-xs': { value: 0.25, unit: 'rem' },
         'spacing-sm': { value: 0.5, unit: 'rem' },
@@ -382,7 +400,11 @@
       function updateVar(name) {
         const v = vars[name];
         const val = varString(name);
-        updateCSSVariable(name, val);
+        if (name === 'shadow-opacity') {
+          updateCSSVariable('shadow-color', `oklch(0 0 0 / ${v.value})`);
+        } else {
+          updateCSSVariable(name, val);
+        }
         const display = document.querySelector(`[data-value="${name}"]`);
         if (display) display.textContent = `${v.value}${v.unit}`;
         updateConfig();
@@ -398,15 +420,19 @@
   --foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
   --background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
 
+  /* Border */
+  --border-width: ${varString('border-width')};
+  --radius: ${varString('radius')};
+
+  /* Shadows */
+  --shadow-color: oklch(0 0 0 / ${vars['shadow-opacity'].value});
+
   /* Spacing */
   --spacing-xs: ${varString('spacing-xs')};
   --spacing-sm: ${varString('spacing-sm')};
   --spacing-md: ${varString('spacing-md')};
   --spacing-lg: ${varString('spacing-lg')};
   --body-spacing: ${varString('body-spacing')};
-
-  /* Shape */
-  --radius: ${varString('radius')};
 
   /* Typography */
   --font-size-base: ${varString('font-size-base')};
@@ -470,7 +496,9 @@
         colors['foreground-faded'].c = colors['foreground'].c;
         colors['foreground-faded'].h = colors['foreground'].h;
 
+        vars['border-width'].value = Math.floor(Math.random() * 3);
         vars['radius'].value = Math.floor(Math.random() * 12) + 2;
+        vars['shadow-opacity'].value = Math.round(Math.random() * 0.2 * 100) / 100;
 
         initSliders();
         updateAllColors();
@@ -487,7 +515,9 @@
           'background': { l: 0.985, c: 0.005, h: 250 }
         },
         vars: {
+          'border-width': 1,
           'radius': 6,
+          'shadow-opacity': 0.1,
           'body-spacing': 2,
           'spacing-xs': 0.25,
           'spacing-sm': 0.5,
@@ -498,6 +528,77 @@
           'paragraph-max-width': 65
         }
       };
+
+      const presets = {
+        default: {
+          colors: {
+            'primary': { l: 0.6, c: 0.15, h: 250 },
+            'foreground': { l: 0.25, c: 0.02, h: 250 },
+            'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
+            'background': { l: 0.985, c: 0.005, h: 250 }
+          },
+          vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.1 }
+        },
+        minimal: {
+          colors: {
+            'primary': { l: 0.45, c: 0.0, h: 0 },
+            'foreground': { l: 0.15, c: 0.0, h: 0 },
+            'foreground-faded': { l: 0.6, c: 0.0, h: 0 },
+            'background': { l: 1.0, c: 0.0, h: 0 }
+          },
+          vars: { 'border-width': 0, 'radius': 0, 'shadow-opacity': 0 }
+        },
+        rounded: {
+          colors: {
+            'primary': { l: 0.55, c: 0.18, h: 320 },
+            'foreground': { l: 0.2, c: 0.02, h: 320 },
+            'foreground-faded': { l: 0.5, c: 0.02, h: 320 },
+            'background': { l: 0.98, c: 0.01, h: 320 }
+          },
+          vars: { 'border-width': 1, 'radius': 16, 'shadow-opacity': 0.12 }
+        },
+        sharp: {
+          colors: {
+            'primary': { l: 0.45, c: 0.12, h: 220 },
+            'foreground': { l: 0.15, c: 0.01, h: 220 },
+            'foreground-faded': { l: 0.45, c: 0.01, h: 220 },
+            'background': { l: 0.97, c: 0.005, h: 220 }
+          },
+          vars: { 'border-width': 1, 'radius': 0, 'shadow-opacity': 0.08 }
+        },
+        dark: {
+          colors: {
+            'primary': { l: 0.7, c: 0.15, h: 180 },
+            'foreground': { l: 0.9, c: 0.01, h: 180 },
+            'foreground-faded': { l: 0.5, c: 0.02, h: 180 },
+            'background': { l: 0.15, c: 0.02, h: 180 }
+          },
+          vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.25 }
+        }
+      };
+
+      function applyPreset(name) {
+        const preset = presets[name];
+        if (!preset) return;
+
+        // Apply colors
+        for (const [colorName, val] of Object.entries(preset.colors)) {
+          colors[colorName].l = val.l;
+          colors[colorName].c = val.c;
+          colors[colorName].h = val.h;
+        }
+
+        // Apply vars (only the ones specified in preset)
+        for (const [varName, val] of Object.entries(preset.vars)) {
+          vars[varName].value = val;
+        }
+
+        initSliders();
+        updateAllColors();
+        for (const name of Object.keys(vars)) {
+          updateVar(name);
+        }
+      }
 
       function reset() {
         // Reset colors
@@ -551,7 +652,13 @@
         });
       });
 
-      // Randomize & Reset
+      // Presets, Randomize & Reset
+      document.getElementById('presets').addEventListener('change', (e) => {
+        if (e.target.value) {
+          applyPreset(e.target.value);
+          e.target.value = '';
+        }
+      });
       document.getElementById('randomize').addEventListener('click', randomize);
       document.getElementById('reset').addEventListener('click', reset);
 
