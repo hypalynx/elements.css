@@ -10,24 +10,24 @@
 
 :root {
   /* Colors */
-  --el-primary: oklch(0.6 0.15 250);
-  --el-primary-content: oklch(0.98 0.01 250);
-  --el-foreground: oklch(0.25 0.02 250);
-  --el-foreground-faded: oklch(0.55 0.01 250);
-  --el-background: oklch(0.985 0.005 250);
-  --el-card: oklch(1.0 0.0 250);
-  --el-ancillary: oklch(0.97 0.008 250);
-  --el-ancillary-content: oklch(0.35 0.02 250);
+  --el-primary: oklch(0.5728 0.2161 259.01);
+  --el-primary-content: oklch(0.98 0 0);
+  --el-foreground: oklch(0.2931 0 0);
+  --el-foreground-faded: oklch(0.55 0 0);
+  --el-background: oklch(0.9491 0 0);
+  --el-card: oklch(1.0 0 0);
+  --el-ancillary: oklch(0.92 0 0);
+  --el-ancillary-content: oklch(0.35 0 0);
 
   /* Semantic Colors */
   --el-info: oklch(0.55 0.15 230);
-  --el-info-content: oklch(0.98 0.01 230);
+  --el-info-content: oklch(0.98 0 0);
   --el-success: oklch(0.55 0.15 145);
-  --el-success-content: oklch(0.98 0.01 145);
+  --el-success-content: oklch(0.98 0 0);
   --el-warning: oklch(0.65 0.15 85);
-  --el-warning-content: oklch(0.2 0.02 85);
+  --el-warning-content: oklch(0.25 0 0);
   --el-error: oklch(0.55 0.18 25);
-  --el-error-content: oklch(0.98 0.01 25);
+  --el-error-content: oklch(0.98 0 0);
 
   /* Spacing */
   --el-spacing-xs: 0.25rem;
