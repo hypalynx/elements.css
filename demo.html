@@ -456,7 +456,7 @@
       };
 
       function updateCSSVariable(name, value) {
-        document.documentElement.style.setProperty(`--${name}`, value);
+        document.documentElement.style.setProperty(`--el-${name}`, value);
       }
 
       function oklchString(l, c, h) {
@@ -501,30 +501,30 @@
         const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
         const config = `:root {
   /* Colors */
-  --primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
-  --primary-content: ${oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h)};
-  --foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
-  --foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
-  --background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
+  --el-primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
+  --el-primary-content: ${oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h)};
+  --el-foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
+  --el-foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
+  --el-background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
 
   /* Border */
-  --border-width: ${varString('border-width')};
-  --radius: ${varString('radius')};
+  --el-border-width: ${varString('border-width')};
+  --el-radius: ${varString('radius')};
 
   /* Shadows */
-  --shadow-color: oklch(0 0 0 / ${vars['shadow-opacity'].value});
+  --el-shadow-color: oklch(0 0 0 / ${vars['shadow-opacity'].value});
 
   /* Spacing */
-  --spacing-xs: ${varString('spacing-xs')};
-  --spacing-sm: ${varString('spacing-sm')};
-  --spacing-md: ${varString('spacing-md')};
-  --spacing-lg: ${varString('spacing-lg')};
-  --body-spacing: ${varString('body-spacing')};
+  --el-spacing-xs: ${varString('spacing-xs')};
+  --el-spacing-sm: ${varString('spacing-sm')};
+  --el-spacing-md: ${varString('spacing-md')};
+  --el-spacing-lg: ${varString('spacing-lg')};
+  --el-body-spacing: ${varString('body-spacing')};
 
   /* Typography */
-  --font-size-base: ${varString('font-size-base')};
-  --line-height-base: ${varString('line-height-base')};
-  --paragraph-max-width: ${varString('paragraph-max-width')};
+  --el-font-size-base: ${varString('font-size-base')};
+  --el-line-height-base: ${varString('line-height-base')};
+  --el-paragraph-max-width: ${varString('paragraph-max-width')};
 }`;
         document.getElementById('config-output').value = config;
       }
