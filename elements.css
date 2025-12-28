@@ -598,8 +598,11 @@ details:not(.unstyled) > *:not(summary) {
 /* Tables */
 
 table:not(.unstyled) {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
+  border: var(--el-border-width) solid var(--el-foreground-faded);
+  border-radius: var(--el-radius);
 }
 
 table:not(.unstyled) th {
@@ -609,10 +612,30 @@ table:not(.unstyled) th {
   font-weight: 600;
 }
 
+table:not(.unstyled) th:first-child {
+  border-top-left-radius: calc(var(--el-radius) - var(--el-border-width));
+}
+
+table:not(.unstyled) th:last-child {
+  border-top-right-radius: calc(var(--el-radius) - var(--el-border-width));
+}
+
 table:not(.unstyled) td {
   padding: var(--el-spacing-sm) var(--el-spacing-md);
   border-bottom: var(--el-border-width) solid oklch(from var(--el-foreground-faded) l c h / 0.3);
   text-align: left;
+}
+
+table:not(.unstyled) tr:last-child td {
+  border-bottom: none;
+}
+
+table:not(.unstyled) tr:last-child td:first-child {
+  border-bottom-left-radius: calc(var(--el-radius) - var(--el-border-width));
+}
+
+table:not(.unstyled) tr:last-child td:last-child {
+  border-bottom-right-radius: calc(var(--el-radius) - var(--el-border-width));
 }
 
 /* Images */
