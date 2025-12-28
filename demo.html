@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/elements.css" type="text/css" media="all">
   </head>
   <body>
-    <aside class="fixed-left w-80 border-r bg-background p-lg flex flex-col gap-sm">
+    <aside class="fixed-left w-80 border-r bg-ancillary p-lg flex flex-col gap-sm">
       <h2>Customize</h2>
 
       <select id="presets">
@@ -100,6 +100,24 @@
               <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="background" data-channel="l"></label>
               <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="background" data-channel="c"></label>
               <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="background" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Card</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="card" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="card" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="card" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Ancillary</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="ancillary" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="ancillary" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="ancillary" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Ancillary Content</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="ancillary-content" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="ancillary-content" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="ancillary-content" data-channel="h"></label>
             </div>
           </div>
         </details>
@@ -258,6 +276,36 @@
           </div>
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;input type="text" placeholder="Text input"&gt;
 &lt;input type="text" disabled&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="password">
+          <h3 class="flex">
+            <span class="flex-1">Password</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <div class="input-password">
+              <input type="text" placeholder="Password" value="secret123">
+              <input type="checkbox" id="pw-demo">
+              <label for="pw-demo"></label>
+            </div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="input-password"&gt;
+  &lt;input type="text" placeholder="Password"&gt;
+  &lt;input type="checkbox" id="pw1"&gt;
+  &lt;label for="pw1"&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="search">
+          <h3 class="flex">
+            <span class="flex-1">Search</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <input type="search" placeholder="Search..." value="query">
+          </div>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;input type="search" placeholder="Search..."&gt;</code></pre>
         </div>
 
         <div class="card shadow-md flex flex-col min-h-48" data-component="textarea">
@@ -576,6 +624,9 @@
         'foreground': { l: 0.25, c: 0.02, h: 250 },
         'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
         'background': { l: 0.985, c: 0.005, h: 250 },
+        'card': { l: 1.0, c: 0.0, h: 250 },
+        'ancillary': { l: 0.97, c: 0.008, h: 250 },
+        'ancillary-content': { l: 0.35, c: 0.02, h: 250 },
         'info': { l: 0.55, c: 0.15, h: 230 },
         'success': { l: 0.55, c: 0.15, h: 145 },
         'warning': { l: 0.65, c: 0.15, h: 85 },
@@ -658,6 +709,9 @@
   --el-foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
   --el-foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
   --el-background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
+  --el-card: ${oklchString(colors['card'].l, colors['card'].c, colors['card'].h)};
+  --el-ancillary: ${oklchString(colors['ancillary'].l, colors['ancillary'].c, colors['ancillary'].h)};
+  --el-ancillary-content: ${oklchString(colors['ancillary-content'].l, colors['ancillary-content'].c, colors['ancillary-content'].h)};
 
   /* Semantic Colors */
   --el-info: ${oklchString(colors['info'].l, colors['info'].c, colors['info'].h)};
@@ -763,6 +817,33 @@
         colors['background'].c = tintBg ? Math.random() * 0.02 : 0;
         colors['background'].h = tintBg ? primaryHue : 0;
 
+        // Card: slightly elevated from background
+        if (isDarkMode) {
+          colors['card'].l = colors['background'].l + 0.03 + Math.random() * 0.04;
+        } else {
+          colors['card'].l = Math.min(1.0, colors['background'].l + 0.01 + Math.random() * 0.02);
+        }
+        colors['card'].c = colors['background'].c * 0.8;
+        colors['card'].h = colors['background'].h;
+
+        // Ancillary: secondary surface (sidebars, navs)
+        if (isDarkMode) {
+          colors['ancillary'].l = colors['background'].l - 0.02 - Math.random() * 0.03;
+        } else {
+          colors['ancillary'].l = colors['background'].l - 0.02 - Math.random() * 0.02;
+        }
+        colors['ancillary'].c = colors['background'].c * 1.2;
+        colors['ancillary'].h = colors['background'].h;
+
+        // Ancillary content: readable on ancillary surface
+        if (isDarkMode) {
+          colors['ancillary-content'].l = 0.75 + Math.random() * 0.1;
+        } else {
+          colors['ancillary-content'].l = 0.3 + Math.random() * 0.1;
+        }
+        colors['ancillary-content'].c = colors['foreground'].c;
+        colors['ancillary-content'].h = primaryHue;
+
         colors['foreground'].c = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
         colors['foreground'].h = primaryHue;
         colors['foreground-faded'].c = colors['foreground'].c;
@@ -803,6 +884,9 @@
           'foreground': { l: 0.25, c: 0.02, h: 250 },
           'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
           'background': { l: 0.985, c: 0.005, h: 250 },
+          'card': { l: 1.0, c: 0.0, h: 250 },
+          'ancillary': { l: 0.97, c: 0.008, h: 250 },
+          'ancillary-content': { l: 0.35, c: 0.02, h: 250 },
           'info': { l: 0.55, c: 0.15, h: 230 },
           'success': { l: 0.55, c: 0.15, h: 145 },
           'warning': { l: 0.65, c: 0.15, h: 85 },
@@ -829,7 +913,10 @@
             'primary': { l: 0.55, c: 0.18, h: 250 },
             'foreground': { l: 0.2, c: 0.015, h: 250 },
             'foreground-faded': { l: 0.5, c: 0.01, h: 250 },
-            'background': { l: 0.985, c: 0.008, h: 250 }
+            'background': { l: 0.985, c: 0.008, h: 250 },
+            'card': { l: 1.0, c: 0.0, h: 250 },
+            'ancillary': { l: 0.97, c: 0.01, h: 250 },
+            'ancillary-content': { l: 0.35, c: 0.02, h: 250 }
           },
           vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.1 }
         },
@@ -838,7 +925,10 @@
             'primary': { l: 0.45, c: 0.02, h: 250 },
             'foreground': { l: 0.15, c: 0.01, h: 250 },
             'foreground-faded': { l: 0.55, c: 0.005, h: 250 },
-            'background': { l: 0.98, c: 0.005, h: 250 }
+            'background': { l: 0.98, c: 0.005, h: 250 },
+            'card': { l: 0.99, c: 0.003, h: 250 },
+            'ancillary': { l: 0.96, c: 0.006, h: 250 },
+            'ancillary-content': { l: 0.35, c: 0.01, h: 250 }
           },
           vars: { 'border-width': 1, 'radius': 4, 'shadow-opacity': 0.06 }
         },
@@ -847,7 +937,10 @@
             'primary': { l: 0.5, c: 0.15, h: 230 },
             'foreground': { l: 0.2, c: 0.02, h: 220 },
             'foreground-faded': { l: 0.5, c: 0.015, h: 220 },
-            'background': { l: 0.98, c: 0.012, h: 220 }
+            'background': { l: 0.98, c: 0.012, h: 220 },
+            'card': { l: 0.99, c: 0.008, h: 220 },
+            'ancillary': { l: 0.96, c: 0.015, h: 220 },
+            'ancillary-content': { l: 0.3, c: 0.02, h: 220 }
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.1 }
         },
@@ -856,7 +949,10 @@
             'primary': { l: 0.5, c: 0.14, h: 145 },
             'foreground': { l: 0.2, c: 0.02, h: 145 },
             'foreground-faded': { l: 0.5, c: 0.015, h: 145 },
-            'background': { l: 0.98, c: 0.01, h: 120 }
+            'background': { l: 0.98, c: 0.01, h: 120 },
+            'card': { l: 0.99, c: 0.006, h: 120 },
+            'ancillary': { l: 0.96, c: 0.012, h: 120 },
+            'ancillary-content': { l: 0.3, c: 0.02, h: 145 }
           },
           vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.08 }
         },
@@ -865,7 +961,10 @@
             'primary': { l: 0.65, c: 0.15, h: 250 },
             'foreground': { l: 0.92, c: 0.01, h: 250 },
             'foreground-faded': { l: 0.55, c: 0.015, h: 250 },
-            'background': { l: 0.15, c: 0.025, h: 260 }
+            'background': { l: 0.15, c: 0.025, h: 260 },
+            'card': { l: 0.18, c: 0.02, h: 260 },
+            'ancillary': { l: 0.12, c: 0.03, h: 260 },
+            'ancillary-content': { l: 0.8, c: 0.015, h: 250 }
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.2 }
         },
@@ -874,7 +973,10 @@
             'primary': { l: 0.65, c: 0.0, h: 0 },
             'foreground': { l: 0.9, c: 0.0, h: 0 },
             'foreground-faded': { l: 0.5, c: 0.0, h: 0 },
-            'background': { l: 0.12, c: 0.0, h: 0 }
+            'background': { l: 0.12, c: 0.0, h: 0 },
+            'card': { l: 0.16, c: 0.0, h: 0 },
+            'ancillary': { l: 0.08, c: 0.0, h: 0 },
+            'ancillary-content': { l: 0.75, c: 0.0, h: 0 }
           },
           vars: { 'border-width': 0, 'radius': 4, 'shadow-opacity': 0 }
         },
@@ -883,7 +985,10 @@
             'primary': { l: 0.5, c: 0.12, h: 30 },
             'foreground': { l: 0.25, c: 0.02, h: 50 },
             'foreground-faded': { l: 0.55, c: 0.015, h: 50 },
-            'background': { l: 0.97, c: 0.02, h: 80 }
+            'background': { l: 0.97, c: 0.02, h: 80 },
+            'card': { l: 0.99, c: 0.015, h: 80 },
+            'ancillary': { l: 0.95, c: 0.025, h: 80 },
+            'ancillary-content': { l: 0.35, c: 0.02, h: 50 }
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.08 }
         },
@@ -892,7 +997,10 @@
             'primary': { l: 0.99, c: 0.0, h: 0 },
             'foreground': { l: 0.98, c: 0.0, h: 0 },
             'foreground-faded': { l: 0.6, c: 0.0, h: 0 },
-            'background': { l: 0.06, c: 0.0, h: 0 }
+            'background': { l: 0.06, c: 0.0, h: 0 },
+            'card': { l: 0.10, c: 0.0, h: 0 },
+            'ancillary': { l: 0.04, c: 0.0, h: 0 },
+            'ancillary-content': { l: 0.85, c: 0.0, h: 0 }
           },
           vars: { 'border-width': 1, 'radius': 0, 'shadow-opacity': 0 }
         }
