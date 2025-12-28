@@ -105,6 +105,36 @@
         </details>
 
         <details>
+          <summary>Semantic Colors</summary>
+          <div class="flex flex-col gap-md">
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Info</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="info" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="info" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="info" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Success</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="success" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="success" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="success" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Warning</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="warning" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="warning" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="warning" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Error</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="error" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="error" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="error" data-channel="h"></label>
+            </div>
+          </div>
+        </details>
+
+        <details>
           <summary>Border</summary>
           <div class="flex flex-col gap-xs">
             <label class="text-sm flex gap-sm items-center">Width <input class="flex-1" type="range" min="0" max="3" step="1" data-var="border-width" data-unit="px"> <span data-value="border-width">1px</span></label>
@@ -150,6 +180,7 @@
     <main class="ml-80 p-lg flex flex-col gap-lg">
       <h1>elements.css</h1>
       <p>A CSS framework that styles HTML elements directly. Customize the variables and copy the config into your project.</p>
+      <p class="text-sm" style="opacity: 0.7;">Filesize: <span id="filesize">...</span> (<span id="filesize-gzip">...</span> gzipped)</p>
 
       <div class="grid grid-cols-3 gap-lg">
         <div class="card shadow-md flex flex-col min-h-48" data-component="headings">
@@ -189,17 +220,31 @@
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;a href="#"&gt;This is a link&lt;/a&gt;</code></pre>
         </div>
 
-        <div class="card shadow-md flex flex-col min-h-48" data-component="buttons">
+        <div class="card shadow-md flex flex-col min-h-48 col-span-2" data-component="buttons">
           <h3 class="flex">
             <span class="flex-1">Buttons</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
           </h3>
-          <div class="flex-1 flex items-center justify-center gap-sm" data-preview>
-            <button>Button</button>
-            <button disabled>Disabled</button>
+          <div class="flex-1 flex flex-col items-center justify-center gap-sm" data-preview>
+            <div class="flex flex-wrap gap-sm">
+              <button>Primary</button>
+              <button class="btn-secondary">Secondary</button>
+              <button class="btn-outline">Outline</button>
+              <button class="btn-ghost">Ghost</button>
+              <button disabled>Disabled</button>
+            </div>
+            <div class="flex flex-wrap gap-sm">
+              <button class="btn-info">Info</button>
+              <button class="btn-success">Success</button>
+              <button class="btn-warning">Warning</button>
+              <button class="btn-error">Error</button>
+            </div>
           </div>
-          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;button&gt;Button&lt;/button&gt;
-&lt;button disabled&gt;Disabled&lt;/button&gt;</code></pre>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;button&gt;Primary&lt;/button&gt;
+&lt;button class="btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="btn-ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="btn-info"&gt;Info&lt;/button&gt;</code></pre>
         </div>
 
         <div class="card shadow-md flex flex-col min-h-48" data-component="inputs">
@@ -385,7 +430,7 @@
 &lt;/dialog&gt;</code></pre>
         </div>
 
-        <div class="card shadow-md flex flex-col min-h-48 col-span-2" data-component="radio-card">
+        <div class="card shadow-md flex flex-col min-h-48" data-component="radio-card">
           <h3 class="flex">
             <span class="flex-1">Radio Card Group</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
@@ -426,6 +471,98 @@
   &lt;!-- more options... --&gt;
 &lt;/div&gt;</code></pre>
         </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="badges">
+          <h3 class="flex">
+            <span class="flex-1">Badges</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-wrap items-center justify-center gap-sm" data-preview>
+            <span class="badge">Default</span>
+            <span class="badge badge-info">Info</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-error">Error</span>
+            <span class="badge badge-outline">Outline</span>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;span class="badge"&gt;Default&lt;/span&gt;
+&lt;span class="badge badge-info"&gt;Info&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;Success&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;Warning&lt;/span&gt;
+&lt;span class="badge badge-error"&gt;Error&lt;/span&gt;
+&lt;span class="badge badge-outline"&gt;Outline&lt;/span&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="alerts">
+          <h3 class="flex">
+            <span class="flex-1">Alerts</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col justify-center gap-sm" data-preview>
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg>
+              <span>This is an info alert.</span>
+            </div>
+            <div class="alert alert-success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+              <span>This is a success alert.</span>
+            </div>
+            <div class="alert alert-warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"/></svg>
+              <span>This is a warning alert.</span>
+            </div>
+            <div class="alert alert-error">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M165.66,101.66,139.31,128l26.35,26.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+              <span>This is an error alert.</span>
+            </div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="alert alert-info"&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+  &lt;span&gt;Info message&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="breadcrumb">
+          <h3 class="flex">
+            <span class="flex-1">Breadcrumb</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <nav>
+              <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li>Current Page</li>
+              </ul>
+            </nav>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;nav&gt;
+  &lt;ul class="breadcrumb"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Current Page&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="button-group">
+          <h3 class="flex">
+            <span class="flex-1">Button Group</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <div class="btn-group">
+              <button>Left</button>
+              <button>Center</button>
+              <button>Right</button>
+            </div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="btn-group"&gt;
+  &lt;button&gt;Left&lt;/button&gt;
+  &lt;button&gt;Center&lt;/button&gt;
+  &lt;button&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
       </div>
 
       <footer class="text-sm" style="opacity: 0.6; margin-top: var(--spacing-lg);">
@@ -438,7 +575,11 @@
         'primary': { l: 0.6, c: 0.15, h: 250 },
         'foreground': { l: 0.25, c: 0.02, h: 250 },
         'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
-        'background': { l: 0.985, c: 0.005, h: 250 }
+        'background': { l: 0.985, c: 0.005, h: 250 },
+        'info': { l: 0.55, c: 0.15, h: 230 },
+        'success': { l: 0.55, c: 0.15, h: 145 },
+        'warning': { l: 0.65, c: 0.15, h: 85 },
+        'error': { l: 0.55, c: 0.18, h: 25 }
       };
 
       const vars = {
@@ -475,13 +616,20 @@
           const color = colors[colorName];
           updateCSSVariable(colorName, oklchString(color.l, color.c, color.h));
         }
-        updatePrimaryContent();
+        updateContentColors();
         updateConfig();
       }
 
-      function updatePrimaryContent() {
+      function updateContentColors() {
+        // Primary content
         const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
         updateCSSVariable('primary-content', oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h));
+        // Semantic content colors
+        for (const name of ['info', 'success', 'warning', 'error']) {
+          const color = colors[name];
+          const contentL = name === 'warning' ? 0.2 : (color.l > 0.5 ? 0.1 : 0.95);
+          updateCSSVariable(`${name}-content`, oklchString(contentL, color.c * 0.1, color.h));
+        }
       }
 
       function updateVar(name) {
@@ -499,6 +647,10 @@
 
       function updateConfig() {
         const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
+        const infoContentL = colors['info'].l > 0.5 ? 0.1 : 0.95;
+        const successContentL = colors['success'].l > 0.5 ? 0.1 : 0.95;
+        const warningContentL = 0.2;
+        const errorContentL = colors['error'].l > 0.5 ? 0.1 : 0.95;
         const config = `:root {
   /* Colors */
   --el-primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
@@ -506,6 +658,16 @@
   --el-foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
   --el-foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
   --el-background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
+
+  /* Semantic Colors */
+  --el-info: ${oklchString(colors['info'].l, colors['info'].c, colors['info'].h)};
+  --el-info-content: ${oklchString(infoContentL, colors['info'].c * 0.1, colors['info'].h)};
+  --el-success: ${oklchString(colors['success'].l, colors['success'].c, colors['success'].h)};
+  --el-success-content: ${oklchString(successContentL, colors['success'].c * 0.1, colors['success'].h)};
+  --el-warning: ${oklchString(colors['warning'].l, colors['warning'].c, colors['warning'].h)};
+  --el-warning-content: ${oklchString(warningContentL, colors['warning'].c * 0.1, colors['warning'].h)};
+  --el-error: ${oklchString(colors['error'].l, colors['error'].c, colors['error'].h)};
+  --el-error-content: ${oklchString(errorContentL, colors['error'].c * 0.1, colors['error'].h)};
 
   /* Border */
   --el-border-width: ${varString('border-width')};
@@ -606,6 +768,24 @@
         colors['foreground-faded'].c = colors['foreground'].c;
         colors['foreground-faded'].h = primaryHue;
 
+        // Randomize semantic colors
+        const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.08;
+        colors['info'].h = 200 + Math.random() * 40;
+        colors['info'].c = semanticChroma;
+        colors['info'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+
+        colors['success'].h = 130 + Math.random() * 30;
+        colors['success'].c = semanticChroma;
+        colors['success'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+
+        colors['warning'].h = 70 + Math.random() * 30;
+        colors['warning'].c = semanticChroma;
+        colors['warning'].l = 0.6 + Math.random() * 0.1;
+
+        colors['error'].h = 15 + Math.random() * 20;
+        colors['error'].c = semanticChroma + 0.03;
+        colors['error'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+
         vars['border-width'].value = Math.floor(Math.random() * 2);
         vars['radius'].value = radius;
         vars['shadow-opacity'].value = Math.round(shadowOpacity * 100) / 100;
@@ -622,7 +802,11 @@
           'primary': { l: 0.6, c: 0.15, h: 250 },
           'foreground': { l: 0.25, c: 0.02, h: 250 },
           'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
-          'background': { l: 0.985, c: 0.005, h: 250 }
+          'background': { l: 0.985, c: 0.005, h: 250 },
+          'info': { l: 0.55, c: 0.15, h: 230 },
+          'success': { l: 0.55, c: 0.15, h: 145 },
+          'warning': { l: 0.65, c: 0.15, h: 85 },
+          'error': { l: 0.55, c: 0.18, h: 25 }
         },
         vars: {
           'border-width': 1,
@@ -764,7 +948,9 @@
           const channel = e.target.dataset.channel;
           colors[colorName][channel] = parseFloat(e.target.value);
           updateCSSVariable(colorName, oklchString(colors[colorName].l, colors[colorName].c, colors[colorName].h));
-          if (colorName === 'primary') updatePrimaryContent();
+          if (['primary', 'info', 'success', 'warning', 'error'].includes(colorName)) {
+            updateContentColors();
+          }
           updateConfig();
         });
       });
@@ -835,6 +1021,13 @@
       // Initialize
       initSliders();
       updateConfig();
+
+      // Fetch and display filesize
+      fetch('/elements.css').then(r => r.text()).then(css => {
+        const bytes = new Blob([css]).size;
+        document.getElementById('filesize').textContent = (bytes / 1024).toFixed(1) + ' KB';
+        document.getElementById('filesize-gzip').textContent = '~' + (bytes * 0.3 / 1024).toFixed(1) + ' KB';
+      });
     </script>
   </body>
 </html>
