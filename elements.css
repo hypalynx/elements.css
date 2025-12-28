@@ -118,11 +118,17 @@ input:not(.unstyled):not([type="range"]):not([type="checkbox"]):not([type="radio
 textarea:not(.unstyled),
 select:not(.unstyled) {
   background: var(--background);
+  color: var(--foreground);
   border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   padding: var(--input-spacing);
   font-family: inherit;
   transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+select:not(.unstyled) option {
+  background: var(--background);
+  color: var(--foreground);
 }
 
 input:not(.unstyled):not([type="range"]):focus,
@@ -278,11 +284,36 @@ dialog:not(.unstyled) {
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
+  opacity: 0;
+  transition: opacity 0.15s, display 0.15s allow-discrete, overlay 0.15s allow-discrete;
+}
+
+dialog[open]:not(.unstyled) {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog[open]:not(.unstyled) {
+    opacity: 0;
+  }
 }
 
 dialog:not(.unstyled)::backdrop {
+  background: oklch(0 0 0 / 0);
+  backdrop-filter: blur(0px);
+  transition: background 0.15s, backdrop-filter 0.15s, display 0.15s allow-discrete, overlay 0.15s allow-discrete;
+}
+
+dialog[open]:not(.unstyled)::backdrop {
   background: oklch(0 0 0 / 0.5);
   backdrop-filter: blur(2px);
+}
+
+@starting-style {
+  dialog[open]:not(.unstyled)::backdrop {
+    background: oklch(0 0 0 / 0);
+    backdrop-filter: blur(0px);
+  }
 }
 
 dialog:not(.unstyled) h2,
@@ -295,6 +326,49 @@ dialog:not(.unstyled) h3 {
   border: var(--border-width) solid var(--foreground-faded);
   border-radius: var(--radius);
   padding: var(--spacing-md);
+}
+
+/* Radio Card Group */
+.radio-card-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.radio-card {
+  flex: 1;
+  position: relative;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-card label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  border: var(--border-width) solid var(--foreground-faded);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.radio-card label:hover {
+  border-color: var(--primary);
+}
+
+.radio-card input:checked + label {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.15);
+}
+
+.radio-card input:focus-visible + label {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 /* Accordion (details/summary) */

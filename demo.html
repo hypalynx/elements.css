@@ -12,18 +12,66 @@
     <aside class="fixed-left w-80 border-r bg-background p-lg flex flex-col gap-sm">
       <h2>Customize</h2>
 
+      <select id="presets">
+        <option value="">Presets</option>
+        <option value="default">Default</option>
+        <option value="slate">Slate</option>
+        <option value="ocean">Ocean</option>
+        <option value="forest">Forest</option>
+        <option value="midnight">Midnight</option>
+        <option value="carbon">Carbon</option>
+        <option value="cream">Cream</option>
+        <option value="noir">Noir</option>
+      </select>
       <div class="flex gap-sm">
-        <select id="presets" class="flex-1">
-          <option value="">Presets</option>
-          <option value="default">Default</option>
-          <option value="minimal">Minimal</option>
-          <option value="rounded">Rounded</option>
-          <option value="sharp">Sharp</option>
-          <option value="dark">Dark</option>
-        </select>
-        <button id="randomize">Random</button>
-        <button id="reset">Reset</button>
+        <button id="randomize" class="flex-1">Random</button>
+        <button id="reset" class="flex-1">Reset</button>
       </div>
+
+      <details>
+        <summary>Random Options</summary>
+        <div class="flex flex-col gap-xs">
+          <label class="text-sm">Mode</label>
+          <select id="random-mode">
+            <option value="any">Any (50/50)</option>
+            <option value="light">Light Only</option>
+            <option value="dark">Dark Only</option>
+          </select>
+          <label class="text-sm">Style</label>
+          <select id="random-style">
+            <option value="any">Any</option>
+            <option value="flat">Flat (no shadows)</option>
+            <option value="soft">Soft (shadows)</option>
+          </select>
+          <label class="text-sm">Corners</label>
+          <select id="random-corners">
+            <option value="any">Any</option>
+            <option value="sharp">Sharp (0px)</option>
+            <option value="rounded">Rounded (8-16px)</option>
+          </select>
+          <label class="text-sm">Contrast</label>
+          <select id="random-contrast">
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+          <label class="text-sm">Palette</label>
+          <select id="random-palette">
+            <option value="any">Any</option>
+            <option value="monochrome">Monochrome</option>
+            <option value="colorful">Colorful</option>
+          </select>
+          <label class="text-sm">Primary Color</label>
+          <select id="random-hue">
+            <option value="any">Any</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="teal">Teal</option>
+          </select>
+        </div>
+      </details>
 
       <div class="flex flex-col gap-sm" id="controls">
         <details open>
@@ -323,21 +371,60 @@
             <dialog id="demo-dialog">
               <h3>Dialog Title</h3>
               <p>This is a native HTML dialog element with backdrop blur.</p>
-              <div class="flex gap-sm justify-center">
-                <button onclick="document.getElementById('demo-dialog').close()">Close</button>
-              </div>
+              <form method="dialog" class="flex gap-sm justify-center">
+                <button>Close</button>
+              </form>
             </dialog>
           </div>
           <pre class="hidden flex-1 flex items-center" data-code><code>&lt;dialog id="my-dialog"&gt;
   &lt;h3&gt;Title&lt;/h3&gt;
   &lt;p&gt;Content&lt;/p&gt;
-  &lt;button onclick="this.closest('dialog').close()"&gt;
-    Close
-  &lt;/button&gt;
-&lt;/dialog&gt;
-&lt;button onclick="document.getElementById('my-dialog').showModal()"&gt;
-  Open
-&lt;/button&gt;</code></pre>
+  &lt;form method="dialog"&gt;
+    &lt;button&gt;Close&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48 col-span-2" data-component="radio-card">
+          <h3 class="flex">
+            <span class="flex-1">Radio Card Group</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <div class="radio-card-group">
+              <div class="radio-card">
+                <input type="radio" name="plan" id="plan-basic" checked>
+                <label for="plan-basic">
+                  <strong>Basic</strong>
+                  <span class="text-sm">$9/mo</span>
+                </label>
+              </div>
+              <div class="radio-card">
+                <input type="radio" name="plan" id="plan-pro">
+                <label for="plan-pro">
+                  <strong>Pro</strong>
+                  <span class="text-sm">$19/mo</span>
+                </label>
+              </div>
+              <div class="radio-card">
+                <input type="radio" name="plan" id="plan-team">
+                <label for="plan-team">
+                  <strong>Team</strong>
+                  <span class="text-sm">$49/mo</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="radio-card-group"&gt;
+  &lt;div class="radio-card"&gt;
+    &lt;input type="radio" name="plan" id="basic" checked&gt;
+    &lt;label for="basic"&gt;
+      &lt;strong&gt;Basic&lt;/strong&gt;
+      &lt;span&gt;$9/mo&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;!-- more options... --&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </div>
 
@@ -464,41 +551,64 @@
       }
 
       function randomize() {
-        const primaryHue = Math.random() * 360;
+        const modeOpt = document.getElementById('random-mode').value;
+        const styleOpt = document.getElementById('random-style').value;
+        const cornersOpt = document.getElementById('random-corners').value;
+        const contrastOpt = document.getElementById('random-contrast').value;
+        const paletteOpt = document.getElementById('random-palette').value;
+        const hueOpt = document.getElementById('random-hue').value;
 
-        colors['primary'].l = 0.5 + Math.random() * 0.2;
-        colors['primary'].c = 0.12 + Math.random() * 0.12;
+        const hueMap = { blue: 240, green: 145, purple: 290, red: 25, orange: 55, teal: 185 };
+        const primaryHue = hueOpt === 'any' ? Math.random() * 360 : hueMap[hueOpt];
+
+        let isDarkMode;
+        if (modeOpt === 'dark') isDarkMode = true;
+        else if (modeOpt === 'light') isDarkMode = false;
+        else isDarkMode = Math.random() > 0.5;
+
+        let shadowOpacity;
+        if (styleOpt === 'flat') shadowOpacity = 0;
+        else if (styleOpt === 'soft') shadowOpacity = 0.08 + Math.random() * 0.12;
+        else shadowOpacity = Math.random() * 0.2;
+
+        let radius;
+        if (cornersOpt === 'sharp') radius = 0;
+        else if (cornersOpt === 'rounded') radius = 8 + Math.floor(Math.random() * 9);
+        else radius = Math.floor(Math.random() * 16);
+
+        let chroma;
+        if (paletteOpt === 'monochrome') chroma = 0;
+        else if (paletteOpt === 'colorful') chroma = 0.15 + Math.random() * 0.1;
+        else chroma = Math.random() > 0.3 ? 0.12 + Math.random() * 0.12 : 0;
+
+        const highContrast = contrastOpt === 'high';
+
         colors['primary'].h = primaryHue;
-
-        const isDarkMode = Math.random() > 0.6;
+        colors['primary'].c = chroma > 0 ? chroma : 0.15;
+        colors['primary'].l = isDarkMode ? 0.65 + Math.random() * 0.1 : 0.5 + Math.random() * 0.15;
 
         if (isDarkMode) {
-          colors['background'].l = 0.12 + Math.random() * 0.1;
-          colors['foreground'].l = 0.88 + Math.random() * 0.08;
-          colors['foreground-faded'].l = 0.5 + Math.random() * 0.12;
+          colors['background'].l = highContrast ? 0.08 : 0.12 + Math.random() * 0.08;
+          colors['foreground'].l = highContrast ? 0.98 : 0.88 + Math.random() * 0.08;
+          colors['foreground-faded'].l = 0.5 + Math.random() * 0.1;
         } else {
-          colors['background'].l = 0.94 + Math.random() * 0.05;
-          colors['foreground'].l = 0.18 + Math.random() * 0.12;
+          colors['background'].l = highContrast ? 1.0 : 0.94 + Math.random() * 0.05;
+          colors['foreground'].l = highContrast ? 0.05 : 0.15 + Math.random() * 0.1;
           colors['foreground-faded'].l = 0.45 + Math.random() * 0.15;
         }
 
-        const tintBackground = Math.random() > 0.4;
-        if (tintBackground) {
-          colors['background'].c = Math.random() * 0.025;
-          colors['background'].h = primaryHue;
-        } else {
-          colors['background'].c = 0;
-          colors['background'].h = 0;
-        }
+        const tintBg = paletteOpt === 'monochrome' ? false : Math.random() > 0.4;
+        colors['background'].c = tintBg ? Math.random() * 0.02 : 0;
+        colors['background'].h = tintBg ? primaryHue : 0;
 
-        colors['foreground'].c = Math.random() * 0.02;
-        colors['foreground'].h = Math.random() > 0.5 ? primaryHue : 0;
+        colors['foreground'].c = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
+        colors['foreground'].h = primaryHue;
         colors['foreground-faded'].c = colors['foreground'].c;
-        colors['foreground-faded'].h = colors['foreground'].h;
+        colors['foreground-faded'].h = primaryHue;
 
-        vars['border-width'].value = Math.floor(Math.random() * 3);
-        vars['radius'].value = Math.floor(Math.random() * 12) + 2;
-        vars['shadow-opacity'].value = Math.round(Math.random() * 0.2 * 100) / 100;
+        vars['border-width'].value = Math.floor(Math.random() * 2);
+        vars['radius'].value = radius;
+        vars['shadow-opacity'].value = Math.round(shadowOpacity * 100) / 100;
 
         initSliders();
         updateAllColors();
@@ -532,48 +642,75 @@
       const presets = {
         default: {
           colors: {
-            'primary': { l: 0.6, c: 0.15, h: 250 },
-            'foreground': { l: 0.25, c: 0.02, h: 250 },
-            'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
-            'background': { l: 0.985, c: 0.005, h: 250 }
+            'primary': { l: 0.55, c: 0.18, h: 250 },
+            'foreground': { l: 0.2, c: 0.015, h: 250 },
+            'foreground-faded': { l: 0.5, c: 0.01, h: 250 },
+            'background': { l: 0.985, c: 0.008, h: 250 }
           },
           vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.1 }
         },
-        minimal: {
+        slate: {
           colors: {
-            'primary': { l: 0.45, c: 0.0, h: 0 },
-            'foreground': { l: 0.15, c: 0.0, h: 0 },
+            'primary': { l: 0.45, c: 0.02, h: 250 },
+            'foreground': { l: 0.15, c: 0.01, h: 250 },
+            'foreground-faded': { l: 0.55, c: 0.005, h: 250 },
+            'background': { l: 0.98, c: 0.005, h: 250 }
+          },
+          vars: { 'border-width': 1, 'radius': 4, 'shadow-opacity': 0.06 }
+        },
+        ocean: {
+          colors: {
+            'primary': { l: 0.5, c: 0.15, h: 230 },
+            'foreground': { l: 0.2, c: 0.02, h: 220 },
+            'foreground-faded': { l: 0.5, c: 0.015, h: 220 },
+            'background': { l: 0.98, c: 0.012, h: 220 }
+          },
+          vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.1 }
+        },
+        forest: {
+          colors: {
+            'primary': { l: 0.5, c: 0.14, h: 145 },
+            'foreground': { l: 0.2, c: 0.02, h: 145 },
+            'foreground-faded': { l: 0.5, c: 0.015, h: 145 },
+            'background': { l: 0.98, c: 0.01, h: 120 }
+          },
+          vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.08 }
+        },
+        midnight: {
+          colors: {
+            'primary': { l: 0.65, c: 0.15, h: 250 },
+            'foreground': { l: 0.92, c: 0.01, h: 250 },
+            'foreground-faded': { l: 0.55, c: 0.015, h: 250 },
+            'background': { l: 0.15, c: 0.025, h: 260 }
+          },
+          vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.2 }
+        },
+        carbon: {
+          colors: {
+            'primary': { l: 0.65, c: 0.0, h: 0 },
+            'foreground': { l: 0.9, c: 0.0, h: 0 },
+            'foreground-faded': { l: 0.5, c: 0.0, h: 0 },
+            'background': { l: 0.12, c: 0.0, h: 0 }
+          },
+          vars: { 'border-width': 0, 'radius': 4, 'shadow-opacity': 0 }
+        },
+        cream: {
+          colors: {
+            'primary': { l: 0.5, c: 0.12, h: 30 },
+            'foreground': { l: 0.25, c: 0.02, h: 50 },
+            'foreground-faded': { l: 0.55, c: 0.015, h: 50 },
+            'background': { l: 0.97, c: 0.02, h: 80 }
+          },
+          vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.08 }
+        },
+        noir: {
+          colors: {
+            'primary': { l: 0.99, c: 0.0, h: 0 },
+            'foreground': { l: 0.98, c: 0.0, h: 0 },
             'foreground-faded': { l: 0.6, c: 0.0, h: 0 },
-            'background': { l: 1.0, c: 0.0, h: 0 }
+            'background': { l: 0.06, c: 0.0, h: 0 }
           },
-          vars: { 'border-width': 0, 'radius': 0, 'shadow-opacity': 0 }
-        },
-        rounded: {
-          colors: {
-            'primary': { l: 0.55, c: 0.18, h: 320 },
-            'foreground': { l: 0.2, c: 0.02, h: 320 },
-            'foreground-faded': { l: 0.5, c: 0.02, h: 320 },
-            'background': { l: 0.98, c: 0.01, h: 320 }
-          },
-          vars: { 'border-width': 1, 'radius': 16, 'shadow-opacity': 0.12 }
-        },
-        sharp: {
-          colors: {
-            'primary': { l: 0.45, c: 0.12, h: 220 },
-            'foreground': { l: 0.15, c: 0.01, h: 220 },
-            'foreground-faded': { l: 0.45, c: 0.01, h: 220 },
-            'background': { l: 0.97, c: 0.005, h: 220 }
-          },
-          vars: { 'border-width': 1, 'radius': 0, 'shadow-opacity': 0.08 }
-        },
-        dark: {
-          colors: {
-            'primary': { l: 0.7, c: 0.15, h: 180 },
-            'foreground': { l: 0.9, c: 0.01, h: 180 },
-            'foreground-faded': { l: 0.5, c: 0.02, h: 180 },
-            'background': { l: 0.15, c: 0.02, h: 180 }
-          },
-          vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.25 }
+          vars: { 'border-width': 1, 'radius': 0, 'shadow-opacity': 0 }
         }
       };
 
