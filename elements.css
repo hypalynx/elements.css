@@ -428,7 +428,7 @@ input[type="range"]:not(.unstyled) {
 
 input[type="range"]:not(.unstyled)::-webkit-slider-runnable-track {
   height: 0.5rem;
-  background: var(--el-stroke-weak);
+  background: oklch(from var(--el-text-strong) l c h / 0.12);
   border-radius: var(--el-radius);
 }
 
@@ -445,7 +445,7 @@ input[type="range"]:not(.unstyled)::-webkit-slider-thumb {
 
 input[type="range"]:not(.unstyled)::-moz-range-track {
   height: 0.5rem;
-  background: var(--el-stroke-weak);
+  background: oklch(from var(--el-text-strong) l c h / 0.12);
   border-radius: var(--el-radius);
 }
 
