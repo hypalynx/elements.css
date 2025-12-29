@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Recursive:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/elements.css" type="text/css" media="all">
+    <style>
+      #contrast-details { width: max-content; max-width: none; }
+      #contrast-details table { white-space: nowrap; }
+    </style>
   </head>
   <body>
     <aside class="fixed-left w-80 border-r bg-ancillary p-lg flex flex-col gap-sm">
@@ -55,11 +59,6 @@
             <option value="any">Any</option>
             <option value="sharp">Sharp (0px)</option>
             <option value="rounded">Rounded (8-16px)</option>
-          </select>
-          <label class="text-sm">Contrast</label>
-          <select id="random-contrast">
-            <option value="normal">Normal</option>
-            <option value="high">High</option>
           </select>
           <label class="text-sm">Palette</label>
           <select id="random-palette">
@@ -215,7 +214,10 @@
     </aside>
 
     <main class="ml-80 p-lg flex flex-col gap-lg">
-      <div id="contrast-status" class="badge" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;"></div>
+      <div id="contrast-status" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;">
+        <button id="contrast-btn" class="badge" popovertarget="contrast-details"></button>
+        <div id="contrast-details" popover anchor="contrast-btn"></div>
+      </div>
       <h1>elements.css</h1>
       <p>A CSS framework that styles HTML elements directly. Customize the variables and copy the config into your project.</p>
       <p class="text-sm" style="opacity: 0.7;">Filesize: <span id="filesize">...</span> (<span id="filesize-gzip">...</span> gzipped)</p>
@@ -662,23 +664,26 @@
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
           </h3>
           <div class="flex-1 flex flex-col justify-center gap-sm" data-preview>
-            <div class="tabs" id="demo-tabs">
-              <span class="active" data-tab="overview">Overview</span>
-              <span data-tab="details">Details</span>
-              <span data-tab="settings">Settings</span>
-            </div>
-            <div id="tab-content">
-              <div data-tab-content="overview">General information and summary.</div>
-              <div data-tab-content="details" class="hidden">Detailed specifications here.</div>
-              <div data-tab-content="settings" class="hidden">Configuration options.</div>
+            <div class="tabs">
+              <input type="radio" name="demo-tabs" id="demo-tab-overview" checked>
+              <label for="demo-tab-overview">Overview</label>
+              <input type="radio" name="demo-tabs" id="demo-tab-details">
+              <label for="demo-tab-details">Details</label>
+              <input type="radio" name="demo-tabs" id="demo-tab-settings">
+              <label for="demo-tab-settings">Settings</label>
+              <div class="tab-panel">General information and summary.</div>
+              <div class="tab-panel">Detailed specifications here.</div>
+              <div class="tab-panel">Configuration options.</div>
             </div>
           </div>
           <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="tabs"&gt;
-  &lt;span class="active" data-tab="a"&gt;Overview&lt;/span&gt;
-  &lt;span data-tab="b"&gt;Details&lt;/span&gt;
-&lt;/div&gt;
-&lt;div data-tab-content="a"&gt;Content A&lt;/div&gt;
-&lt;div data-tab-content="b" class="hidden"&gt;Content B&lt;/div&gt;</code></pre>
+  &lt;input type="radio" name="tabs" id="tab1" checked&gt;
+  &lt;label for="tab1"&gt;Overview&lt;/label&gt;
+  &lt;input type="radio" name="tabs" id="tab2"&gt;
+  &lt;label for="tab2"&gt;Details&lt;/label&gt;
+  &lt;div class="tab-panel"&gt;Content A&lt;/div&gt;
+  &lt;div class="tab-panel"&gt;Content B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
         </div>
 
         <div class="card shadow-md flex flex-col min-h-48" data-component="hr">
@@ -716,19 +721,24 @@
 
     <script>
       const colors = {
-        'primary': { l: 0.6, c: 0.15, h: 250 },
-        'text-strong': { l: 0.25, c: 0.02, h: 250 },
-        'text-weak': { l: 0.40, c: 0.01, h: 250 },
+        'primary': { l: 0.45, c: 0.18, h: 250 },
+        'primary-content': { l: 0.95, c: 0.05, h: 250 },
+        'text-strong': { l: 0.18, c: 0.015, h: 250 },
+        'text-weak': { l: 0.32, c: 0.01, h: 250 },
         'stroke-strong': { l: 0.45, c: 0.01, h: 250 },
         'stroke-weak': { l: 0.55, c: 0.01, h: 250 },
-        'background': { l: 0.985, c: 0.005, h: 250 },
-        'card': { l: 1.0, c: 0.0, h: 250 },
-        'ancillary': { l: 0.97, c: 0.008, h: 250 },
-        'ancillary-content': { l: 0.35, c: 0.02, h: 250 },
-        'info': { l: 0.55, c: 0.15, h: 230 },
-        'success': { l: 0.55, c: 0.15, h: 145 },
-        'warning': { l: 0.65, c: 0.15, h: 85 },
-        'error': { l: 0.55, c: 0.18, h: 25 }
+        'background': { l: 0.98, c: 0.008, h: 250 },
+        'card': { l: 0.99, c: 0.0, h: 250 },
+        'ancillary': { l: 0.95, c: 0.01, h: 250 },
+        'ancillary-content': { l: 0.18, c: 0.02, h: 250 },
+        'info': { l: 0.45, c: 0.15, h: 230 },
+        'info-content': { l: 0.95, c: 0.05, h: 230 },
+        'success': { l: 0.45, c: 0.15, h: 145 },
+        'success-content': { l: 0.95, c: 0.05, h: 145 },
+        'warning': { l: 0.8, c: 0.15, h: 85 },
+        'warning-content': { l: 0.2, c: 0.05, h: 85 },
+        'error': { l: 0.45, c: 0.18, h: 25 },
+        'error-content': { l: 0.95, c: 0.05, h: 25 }
       };
 
       function srgbLuminance(r, g, b) {
@@ -755,19 +765,85 @@
         return Math.pow(l, 2.2);
       }
 
+      // Check if two lightness values have sufficient contrast
+      function hasGoodContrast(fgL, bgL) {
+        const fgLum = oklchToLuminance(fgL);
+        const bgLum = oklchToLuminance(bgL);
+        const wcag = wcagContrast(fgLum, bgLum);
+        const apca = Math.abs(apcaContrast(fgLum, bgLum));
+        return wcag >= 4.5 && apca >= 60;
+      }
+
+      // Get a foreground lightness that contrasts well with background
+      function getContrastingL(bgL, preferLight) {
+        if (preferLight) {
+          // For dark backgrounds, find light foreground
+          for (let l = 0.95; l >= 0.7; l -= 0.05) {
+            if (hasGoodContrast(l, bgL)) return l;
+          }
+          return 0.95;
+        } else {
+          // For light backgrounds, find dark foreground
+          for (let l = 0.15; l <= 0.4; l += 0.05) {
+            if (hasGoodContrast(l, bgL)) return l;
+          }
+          return 0.15;
+        }
+      }
+
       function checkContrast() {
-        const textL = oklchToLuminance(colors['text-strong'].l);
-        const bgL = oklchToLuminance(colors['background'].l);
-        const wcag = wcagContrast(textL, bgL);
-        const apca = Math.abs(apcaContrast(textL, bgL));
+        const pairs = [
+          { name: 'Text', fg: colors['text-strong'].l, bg: colors['background'].l },
+          { name: 'Text weak', fg: colors['text-weak'].l, bg: colors['background'].l },
+          { name: 'Text on card', fg: colors['text-strong'].l, bg: colors['card'].l },
+          { name: 'Primary on bg', fg: colors['primary'].l, bg: colors['background'].l },
+          { name: 'Primary btn', fg: colors['primary-content'].l, bg: colors['primary'].l },
+          { name: 'Info btn', fg: colors['info-content'].l, bg: colors['info'].l },
+          { name: 'Success btn', fg: colors['success-content'].l, bg: colors['success'].l },
+          { name: 'Warning btn', fg: colors['warning-content'].l, bg: colors['warning'].l },
+          { name: 'Error btn', fg: colors['error-content'].l, bg: colors['error'].l },
+          { name: 'Sidebar', fg: colors['ancillary-content'].l, bg: colors['ancillary'].l }
+        ];
 
-        const status = document.getElementById('contrast-status');
-        const isLowContrast = wcag < 4.5 || apca < 60;
+        const results = [];
+        for (const pair of pairs) {
+          const fgLum = oklchToLuminance(pair.fg);
+          const bgLum = oklchToLuminance(pair.bg);
+          const wcag = wcagContrast(fgLum, bgLum);
+          const apca = Math.abs(apcaContrast(fgLum, bgLum));
+          const pass = wcag >= 4.5 && apca >= 60;
+          results.push({ name: pair.name, wcag, apca, pass });
+        }
 
-        status.className = isLowContrast ? 'badge badge-warning' : 'badge badge-success';
-        status.textContent = isLowContrast
-          ? `⚠ Low Contrast: WCAG ${wcag.toFixed(1)}:1 | APCA Lc ${apca.toFixed(0)}`
-          : `✓ Contrast OK: WCAG ${wcag.toFixed(1)}:1 | APCA Lc ${apca.toFixed(0)}`;
+        const failures = results.filter(r => !r.pass);
+        const btn = document.getElementById('contrast-btn');
+        const details = document.getElementById('contrast-details');
+
+        if (failures.length > 0) {
+          btn.className = 'badge badge-warning';
+          btn.textContent = `⚠ ${failures.length} contrast issue${failures.length > 1 ? 's' : ''}`;
+        } else {
+          btn.className = 'badge badge-success';
+          btn.textContent = '✓ All contrast OK';
+        }
+
+        details.innerHTML = `
+          <table class="text-sm">
+            <thead>
+              <tr><th></th><th>Pair</th><th>Lc</th><th>Target</th><th>WCAG</th></tr>
+            </thead>
+            <tbody>
+              ${results.map(r => `
+                <tr${r.pass ? '' : ' style="color: var(--el-warning)"'}>
+                  <td>${r.pass ? '✓' : '✗'}</td>
+                  <td>${r.name}</td>
+                  <td>${r.apca.toFixed(0)}</td>
+                  <td>60</td>
+                  <td>${r.wcag.toFixed(1)}:1</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>`;
       }
 
       const vars = {
@@ -804,21 +880,8 @@
           const color = colors[colorName];
           updateCSSVariable(colorName, oklchString(color.l, color.c, color.h));
         }
-        updateContentColors();
         updateConfig();
         checkContrast();
-      }
-
-      function updateContentColors() {
-        // Primary content
-        const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
-        updateCSSVariable('primary-content', oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h));
-        // Semantic content colors
-        for (const name of ['info', 'success', 'warning', 'error']) {
-          const color = colors[name];
-          const contentL = name === 'warning' ? 0.2 : (color.l > 0.5 ? 0.1 : 0.95);
-          updateCSSVariable(`${name}-content`, oklchString(contentL, color.c * 0.1, color.h));
-        }
       }
 
       function updateVar(name) {
@@ -835,33 +898,29 @@
       }
 
       function updateConfig() {
-        const primaryContentL = colors['primary'].l > 0.5 ? 0.1 : 0.95;
-        const infoContentL = colors['info'].l > 0.5 ? 0.1 : 0.95;
-        const successContentL = colors['success'].l > 0.5 ? 0.1 : 0.95;
-        const warningContentL = 0.2;
-        const errorContentL = colors['error'].l > 0.5 ? 0.1 : 0.95;
+        const c = colors;
         const config = `:root {
   /* Colors */
-  --el-primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
-  --el-primary-content: ${oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h)};
-  --el-text-strong: ${oklchString(colors['text-strong'].l, colors['text-strong'].c, colors['text-strong'].h)};
-  --el-text-weak: ${oklchString(colors['text-weak'].l, colors['text-weak'].c, colors['text-weak'].h)};
-  --el-stroke-strong: ${oklchString(colors['stroke-strong'].l, colors['stroke-strong'].c, colors['stroke-strong'].h)};
-  --el-stroke-weak: ${oklchString(colors['stroke-weak'].l, colors['stroke-weak'].c, colors['stroke-weak'].h)};
-  --el-background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
-  --el-card: ${oklchString(colors['card'].l, colors['card'].c, colors['card'].h)};
-  --el-ancillary: ${oklchString(colors['ancillary'].l, colors['ancillary'].c, colors['ancillary'].h)};
-  --el-ancillary-content: ${oklchString(colors['ancillary-content'].l, colors['ancillary-content'].c, colors['ancillary-content'].h)};
+  --el-primary: ${oklchString(c['primary'].l, c['primary'].c, c['primary'].h)};
+  --el-primary-content: ${oklchString(c['primary-content'].l, c['primary-content'].c, c['primary-content'].h)};
+  --el-text-strong: ${oklchString(c['text-strong'].l, c['text-strong'].c, c['text-strong'].h)};
+  --el-text-weak: ${oklchString(c['text-weak'].l, c['text-weak'].c, c['text-weak'].h)};
+  --el-stroke-strong: ${oklchString(c['stroke-strong'].l, c['stroke-strong'].c, c['stroke-strong'].h)};
+  --el-stroke-weak: ${oklchString(c['stroke-weak'].l, c['stroke-weak'].c, c['stroke-weak'].h)};
+  --el-background: ${oklchString(c['background'].l, c['background'].c, c['background'].h)};
+  --el-card: ${oklchString(c['card'].l, c['card'].c, c['card'].h)};
+  --el-ancillary: ${oklchString(c['ancillary'].l, c['ancillary'].c, c['ancillary'].h)};
+  --el-ancillary-content: ${oklchString(c['ancillary-content'].l, c['ancillary-content'].c, c['ancillary-content'].h)};
 
   /* Semantic Colors */
-  --el-info: ${oklchString(colors['info'].l, colors['info'].c, colors['info'].h)};
-  --el-info-content: ${oklchString(infoContentL, colors['info'].c * 0.1, colors['info'].h)};
-  --el-success: ${oklchString(colors['success'].l, colors['success'].c, colors['success'].h)};
-  --el-success-content: ${oklchString(successContentL, colors['success'].c * 0.1, colors['success'].h)};
-  --el-warning: ${oklchString(colors['warning'].l, colors['warning'].c, colors['warning'].h)};
-  --el-warning-content: ${oklchString(warningContentL, colors['warning'].c * 0.1, colors['warning'].h)};
-  --el-error: ${oklchString(colors['error'].l, colors['error'].c, colors['error'].h)};
-  --el-error-content: ${oklchString(errorContentL, colors['error'].c * 0.1, colors['error'].h)};
+  --el-info: ${oklchString(c['info'].l, c['info'].c, c['info'].h)};
+  --el-info-content: ${oklchString(c['info-content'].l, c['info-content'].c, c['info-content'].h)};
+  --el-success: ${oklchString(c['success'].l, c['success'].c, c['success'].h)};
+  --el-success-content: ${oklchString(c['success-content'].l, c['success-content'].c, c['success-content'].h)};
+  --el-warning: ${oklchString(c['warning'].l, c['warning'].c, c['warning'].h)};
+  --el-warning-content: ${oklchString(c['warning-content'].l, c['warning-content'].c, c['warning-content'].h)};
+  --el-error: ${oklchString(c['error'].l, c['error'].c, c['error'].h)};
+  --el-error-content: ${oklchString(c['error-content'].l, c['error-content'].c, c['error-content'].h)};
 
   /* Border */
   --el-border-width: ${varString('border-width')};
@@ -910,7 +969,6 @@
         const modeOpt = document.getElementById('random-mode').value;
         const styleOpt = document.getElementById('random-style').value;
         const cornersOpt = document.getElementById('random-corners').value;
-        const contrastOpt = document.getElementById('random-contrast').value;
         const paletteOpt = document.getElementById('random-palette').value;
         const hueOpt = document.getElementById('random-hue').value;
 
@@ -937,83 +995,109 @@
         else if (paletteOpt === 'colorful') chroma = 0.15 + Math.random() * 0.1;
         else chroma = Math.random() > 0.3 ? 0.12 + Math.random() * 0.12 : 0;
 
-        const highContrast = contrastOpt === 'high';
+        const textChroma = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
 
-        colors['primary'].h = primaryHue;
-        colors['primary'].c = chroma > 0 ? chroma : 0.15;
-        colors['primary'].l = isDarkMode ? 0.65 + Math.random() * 0.1 : 0.5 + Math.random() * 0.15;
-
-        if (isDarkMode) {
-          colors['background'].l = highContrast ? 0.08 : 0.12 + Math.random() * 0.08;
-          colors['text-strong'].l = highContrast ? 0.98 : 0.88 + Math.random() * 0.08;
-          colors['text-weak'].l = 0.65 + Math.random() * 0.1;
-          colors['stroke-strong'].l = 0.55 + Math.random() * 0.1;
-          colors['stroke-weak'].l = 0.5 + Math.random() * 0.1;
-        } else {
-          colors['background'].l = highContrast ? 1.0 : 0.94 + Math.random() * 0.05;
-          colors['text-strong'].l = highContrast ? 0.05 : 0.15 + Math.random() * 0.1;
-          colors['text-weak'].l = 0.35 + Math.random() * 0.1;
-          colors['stroke-strong'].l = 0.4 + Math.random() * 0.1;
-          colors['stroke-weak'].l = 0.45 + Math.random() * 0.15;
-        }
-
+        // 1. Set background first - this anchors everything
         const tintBg = paletteOpt === 'monochrome' ? false : Math.random() > 0.4;
-        colors['background'].c = tintBg ? Math.random() * 0.02 : 0;
+        colors['background'].l = isDarkMode ? 0.1 + Math.random() * 0.08 : 0.95 + Math.random() * 0.04;
+        colors['background'].c = tintBg ? Math.random() * 0.015 : 0;
         colors['background'].h = tintBg ? primaryHue : 0;
 
-        // Card: slightly elevated from background
-        if (isDarkMode) {
-          colors['card'].l = colors['background'].l + 0.03 + Math.random() * 0.04;
-        } else {
-          colors['card'].l = Math.min(1.0, colors['background'].l + 0.01 + Math.random() * 0.02);
-        }
-        colors['card'].c = colors['background'].c * 0.8;
-        colors['card'].h = colors['background'].h;
-
-        // Ancillary: secondary surface (sidebars, navs)
-        if (isDarkMode) {
-          colors['ancillary'].l = colors['background'].l - 0.02 - Math.random() * 0.03;
-        } else {
-          colors['ancillary'].l = colors['background'].l - 0.02 - Math.random() * 0.02;
-        }
-        colors['ancillary'].c = colors['background'].c * 1.2;
-        colors['ancillary'].h = colors['background'].h;
-
-        // Ancillary content: readable on ancillary surface
-        if (isDarkMode) {
-          colors['ancillary-content'].l = 0.75 + Math.random() * 0.1;
-        } else {
-          colors['ancillary-content'].l = 0.3 + Math.random() * 0.1;
-        }
-        colors['ancillary-content'].c = colors['text-strong'].c;
-        colors['ancillary-content'].h = primaryHue;
-
-        colors['text-strong'].c = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
+        // 2. Text colors - ensure contrast with background
+        colors['text-strong'].l = getContrastingL(colors['background'].l, isDarkMode);
+        colors['text-strong'].c = textChroma;
         colors['text-strong'].h = primaryHue;
-        colors['text-weak'].c = colors['text-strong'].c;
+
+        // Text weak needs contrast too - find a value that passes
+        colors['text-weak'].l = isDarkMode
+          ? getContrastingL(colors['background'].l, true) - 0.15
+          : getContrastingL(colors['background'].l, false) + 0.1;
+        // Verify and fix if needed
+        if (!hasGoodContrast(colors['text-weak'].l, colors['background'].l)) {
+          colors['text-weak'].l = getContrastingL(colors['background'].l, isDarkMode);
+        }
+        colors['text-weak'].c = textChroma;
         colors['text-weak'].h = primaryHue;
-        colors['stroke-strong'].c = colors['text-strong'].c;
+
+        colors['stroke-strong'].l = isDarkMode ? 0.5 + Math.random() * 0.1 : 0.45 + Math.random() * 0.1;
+        colors['stroke-strong'].c = textChroma;
         colors['stroke-strong'].h = primaryHue;
-        colors['stroke-weak'].c = colors['text-strong'].c;
+        colors['stroke-weak'].l = isDarkMode ? 0.4 + Math.random() * 0.1 : 0.55 + Math.random() * 0.1;
+        colors['stroke-weak'].c = textChroma;
         colors['stroke-weak'].h = primaryHue;
 
-        // Randomize semantic colors
-        const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.08;
-        colors['info'].h = 200 + Math.random() * 40;
-        colors['info'].c = semanticChroma;
-        colors['info'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+        // 3. Card - slightly different from background, text-strong must contrast
+        colors['card'].l = isDarkMode
+          ? colors['background'].l + 0.03 + Math.random() * 0.03
+          : Math.min(0.99, colors['background'].l + 0.01 + Math.random() * 0.02);
+        colors['card'].c = colors['background'].c * 0.8;
+        colors['card'].h = colors['background'].h;
+        // Verify text-strong contrasts with card
+        if (!hasGoodContrast(colors['text-strong'].l, colors['card'].l)) {
+          colors['text-strong'].l = getContrastingL(colors['card'].l, isDarkMode);
+        }
 
-        colors['success'].h = 130 + Math.random() * 30;
-        colors['success'].c = semanticChroma;
-        colors['success'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+        // 4. Ancillary surface and content
+        colors['ancillary'].l = isDarkMode
+          ? Math.max(0.05, colors['background'].l - 0.03 - Math.random() * 0.02)
+          : colors['background'].l - 0.03 - Math.random() * 0.02;
+        colors['ancillary'].c = colors['background'].c * 1.2;
+        colors['ancillary'].h = colors['background'].h;
+        colors['ancillary-content'].l = getContrastingL(colors['ancillary'].l, isDarkMode);
+        colors['ancillary-content'].c = textChroma;
+        colors['ancillary-content'].h = primaryHue;
 
-        colors['warning'].h = 70 + Math.random() * 30;
+        // 5. Primary - must contrast with background
+        colors['primary'].h = primaryHue;
+        colors['primary'].c = chroma > 0 ? chroma : 0.15;
+        // Find a primary lightness that contrasts with background
+        if (isDarkMode) {
+          // Dark bg: primary should be lighter
+          for (let l = 0.6; l <= 0.75; l += 0.05) {
+            if (hasGoodContrast(l, colors['background'].l)) {
+              colors['primary'].l = l + Math.random() * 0.05;
+              break;
+            }
+          }
+        } else {
+          // Light bg: primary should be darker
+          for (let l = 0.5; l >= 0.35; l -= 0.05) {
+            if (hasGoodContrast(l, colors['background'].l)) {
+              colors['primary'].l = l - Math.random() * 0.05;
+              break;
+            }
+          }
+        }
+        // Primary content
+        colors['primary-content'].l = getContrastingL(colors['primary'].l, colors['primary'].l < 0.5);
+        colors['primary-content'].c = colors['primary'].c * 0.3;
+        colors['primary-content'].h = colors['primary'].h;
+
+        // 6. Semantic colors - all need contrasting content
+        const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.06;
+
+        function setSemanticColor(name, hueBase, hueRange) {
+          colors[name].h = hueBase + Math.random() * hueRange;
+          colors[name].c = semanticChroma;
+          // Use mid-range lightness that allows for contrasting content
+          colors[name].l = 0.45 + Math.random() * 0.1;
+          // Content color
+          colors[`${name}-content`].l = getContrastingL(colors[name].l, colors[name].l < 0.5);
+          colors[`${name}-content`].c = colors[name].c * 0.3;
+          colors[`${name}-content`].h = colors[name].h;
+        }
+
+        setSemanticColor('info', 210, 30);
+        setSemanticColor('success', 135, 25);
+        setSemanticColor('error', 20, 15);
+
+        // Warning is special - needs light bg with dark text
+        colors['warning'].h = 75 + Math.random() * 20;
         colors['warning'].c = semanticChroma;
-        colors['warning'].l = 0.6 + Math.random() * 0.1;
-
-        colors['error'].h = 15 + Math.random() * 20;
-        colors['error'].c = semanticChroma + 0.03;
-        colors['error'].l = isDarkMode ? 0.6 + Math.random() * 0.1 : 0.5 + Math.random() * 0.1;
+        colors['warning'].l = 0.75 + Math.random() * 0.1; // Light yellow/orange
+        colors['warning-content'].l = getContrastingL(colors['warning'].l, false); // Dark text
+        colors['warning-content'].c = colors['warning'].c * 0.3;
+        colors['warning-content'].h = colors['warning'].h;
 
         vars['border-width'].value = Math.floor(Math.random() * 2);
         vars['radius'].value = radius;
@@ -1028,19 +1112,24 @@
 
       const defaults = {
         colors: {
-          'primary': { l: 0.6, c: 0.15, h: 250 },
-          'text-strong': { l: 0.25, c: 0.02, h: 250 },
-          'text-weak': { l: 0.40, c: 0.01, h: 250 },
+          'primary': { l: 0.45, c: 0.18, h: 250 },
+          'primary-content': { l: 0.95, c: 0.05, h: 250 },
+          'text-strong': { l: 0.18, c: 0.015, h: 250 },
+          'text-weak': { l: 0.32, c: 0.01, h: 250 },
           'stroke-strong': { l: 0.45, c: 0.01, h: 250 },
           'stroke-weak': { l: 0.55, c: 0.01, h: 250 },
-          'background': { l: 0.985, c: 0.005, h: 250 },
-          'card': { l: 1.0, c: 0.0, h: 250 },
-          'ancillary': { l: 0.97, c: 0.008, h: 250 },
-          'ancillary-content': { l: 0.35, c: 0.02, h: 250 },
-          'info': { l: 0.55, c: 0.15, h: 230 },
-          'success': { l: 0.55, c: 0.15, h: 145 },
-          'warning': { l: 0.65, c: 0.15, h: 85 },
-          'error': { l: 0.55, c: 0.18, h: 25 }
+          'background': { l: 0.98, c: 0.008, h: 250 },
+          'card': { l: 0.99, c: 0.0, h: 250 },
+          'ancillary': { l: 0.95, c: 0.01, h: 250 },
+          'ancillary-content': { l: 0.18, c: 0.02, h: 250 },
+          'info': { l: 0.45, c: 0.15, h: 230 },
+          'info-content': { l: 0.95, c: 0.05, h: 230 },
+          'success': { l: 0.45, c: 0.15, h: 145 },
+          'success-content': { l: 0.95, c: 0.05, h: 145 },
+          'warning': { l: 0.8, c: 0.15, h: 85 },
+          'warning-content': { l: 0.2, c: 0.05, h: 85 },
+          'error': { l: 0.45, c: 0.18, h: 25 },
+          'error-content': { l: 0.95, c: 0.05, h: 25 }
         },
         vars: {
           'border-width': 1,
@@ -1057,60 +1146,74 @@
         }
       };
 
+      // Semantic colors with guaranteed contrast
+      // L ~0.45 = dark enough for light content (L 0.95)
+      // Warning L 0.8 = light enough for dark content (L 0.2)
+      const semanticColors = {
+        'info': { l: 0.45, c: 0.15, h: 230 },
+        'success': { l: 0.45, c: 0.15, h: 145 },
+        'warning': { l: 0.8, c: 0.15, h: 85 },
+        'error': { l: 0.45, c: 0.18, h: 25 }
+      };
+
       const presets = {
         default: {
           colors: {
-            'primary': { l: 0.55, c: 0.18, h: 250 },
-            'text-strong': { l: 0.2, c: 0.015, h: 250 },
-            'text-weak': { l: 0.35, c: 0.01, h: 250 },
-            'stroke-strong': { l: 0.4, c: 0.01, h: 250 },
-            'stroke-weak': { l: 0.5, c: 0.01, h: 250 },
-            'background': { l: 0.985, c: 0.008, h: 250 },
-            'card': { l: 1.0, c: 0.0, h: 250 },
-            'ancillary': { l: 0.97, c: 0.01, h: 250 },
-            'ancillary-content': { l: 0.35, c: 0.02, h: 250 }
+            'primary': { l: 0.45, c: 0.18, h: 250 },
+            'text-strong': { l: 0.18, c: 0.015, h: 250 },
+            'text-weak': { l: 0.32, c: 0.01, h: 250 },
+            'stroke-strong': { l: 0.45, c: 0.01, h: 250 },
+            'stroke-weak': { l: 0.55, c: 0.01, h: 250 },
+            'background': { l: 0.98, c: 0.008, h: 250 },
+            'card': { l: 0.99, c: 0.0, h: 250 },
+            'ancillary': { l: 0.95, c: 0.01, h: 250 },
+            'ancillary-content': { l: 0.18, c: 0.02, h: 250 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.1 }
         },
         slate: {
           colors: {
-            'primary': { l: 0.45, c: 0.02, h: 250 },
+            'primary': { l: 0.35, c: 0.02, h: 250 },
             'text-strong': { l: 0.15, c: 0.01, h: 250 },
-            'text-weak': { l: 0.35, c: 0.005, h: 250 },
+            'text-weak': { l: 0.3, c: 0.005, h: 250 },
             'stroke-strong': { l: 0.45, c: 0.005, h: 250 },
             'stroke-weak': { l: 0.55, c: 0.005, h: 250 },
-            'background': { l: 0.98, c: 0.005, h: 250 },
-            'card': { l: 0.99, c: 0.003, h: 250 },
-            'ancillary': { l: 0.96, c: 0.006, h: 250 },
-            'ancillary-content': { l: 0.35, c: 0.01, h: 250 }
+            'background': { l: 0.97, c: 0.005, h: 250 },
+            'card': { l: 0.98, c: 0.003, h: 250 },
+            'ancillary': { l: 0.94, c: 0.006, h: 250 },
+            'ancillary-content': { l: 0.18, c: 0.01, h: 250 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 4, 'shadow-opacity': 0.06 }
         },
         ocean: {
           colors: {
-            'primary': { l: 0.5, c: 0.15, h: 230 },
-            'text-strong': { l: 0.2, c: 0.02, h: 220 },
-            'text-weak': { l: 0.35, c: 0.015, h: 220 },
-            'stroke-strong': { l: 0.4, c: 0.015, h: 220 },
-            'stroke-weak': { l: 0.5, c: 0.015, h: 220 },
-            'background': { l: 0.98, c: 0.012, h: 220 },
-            'card': { l: 0.99, c: 0.008, h: 220 },
-            'ancillary': { l: 0.96, c: 0.015, h: 220 },
-            'ancillary-content': { l: 0.3, c: 0.02, h: 220 }
+            'primary': { l: 0.4, c: 0.15, h: 230 },
+            'text-strong': { l: 0.18, c: 0.02, h: 220 },
+            'text-weak': { l: 0.32, c: 0.015, h: 220 },
+            'stroke-strong': { l: 0.45, c: 0.015, h: 220 },
+            'stroke-weak': { l: 0.55, c: 0.015, h: 220 },
+            'background': { l: 0.97, c: 0.012, h: 220 },
+            'card': { l: 0.98, c: 0.008, h: 220 },
+            'ancillary': { l: 0.94, c: 0.015, h: 220 },
+            'ancillary-content': { l: 0.18, c: 0.02, h: 220 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.1 }
         },
         forest: {
           colors: {
-            'primary': { l: 0.5, c: 0.14, h: 145 },
-            'text-strong': { l: 0.2, c: 0.02, h: 145 },
-            'text-weak': { l: 0.35, c: 0.015, h: 145 },
-            'stroke-strong': { l: 0.4, c: 0.015, h: 145 },
-            'stroke-weak': { l: 0.5, c: 0.015, h: 145 },
-            'background': { l: 0.98, c: 0.01, h: 120 },
-            'card': { l: 0.99, c: 0.006, h: 120 },
-            'ancillary': { l: 0.96, c: 0.012, h: 120 },
-            'ancillary-content': { l: 0.3, c: 0.02, h: 145 }
+            'primary': { l: 0.4, c: 0.14, h: 145 },
+            'text-strong': { l: 0.18, c: 0.02, h: 145 },
+            'text-weak': { l: 0.32, c: 0.015, h: 145 },
+            'stroke-strong': { l: 0.45, c: 0.015, h: 145 },
+            'stroke-weak': { l: 0.55, c: 0.015, h: 145 },
+            'background': { l: 0.97, c: 0.01, h: 120 },
+            'card': { l: 0.98, c: 0.006, h: 120 },
+            'ancillary': { l: 0.94, c: 0.012, h: 120 },
+            'ancillary-content': { l: 0.18, c: 0.02, h: 145 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 6, 'shadow-opacity': 0.08 }
         },
@@ -1118,55 +1221,59 @@
           colors: {
             'primary': { l: 0.65, c: 0.15, h: 250 },
             'text-strong': { l: 0.92, c: 0.01, h: 250 },
-            'text-weak': { l: 0.7, c: 0.01, h: 250 },
-            'stroke-strong': { l: 0.6, c: 0.015, h: 250 },
-            'stroke-weak': { l: 0.55, c: 0.015, h: 250 },
-            'background': { l: 0.15, c: 0.025, h: 260 },
-            'card': { l: 0.18, c: 0.02, h: 260 },
-            'ancillary': { l: 0.12, c: 0.03, h: 260 },
-            'ancillary-content': { l: 0.8, c: 0.015, h: 250 }
+            'text-weak': { l: 0.75, c: 0.01, h: 250 },
+            'stroke-strong': { l: 0.55, c: 0.015, h: 250 },
+            'stroke-weak': { l: 0.45, c: 0.015, h: 250 },
+            'background': { l: 0.12, c: 0.025, h: 260 },
+            'card': { l: 0.15, c: 0.02, h: 260 },
+            'ancillary': { l: 0.08, c: 0.03, h: 260 },
+            'ancillary-content': { l: 0.9, c: 0.015, h: 250 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.2 }
         },
         carbon: {
           colors: {
-            'primary': { l: 0.65, c: 0.0, h: 0 },
-            'text-strong': { l: 0.9, c: 0.0, h: 0 },
-            'text-weak': { l: 0.7, c: 0.0, h: 0 },
-            'stroke-strong': { l: 0.55, c: 0.0, h: 0 },
-            'stroke-weak': { l: 0.5, c: 0.0, h: 0 },
-            'background': { l: 0.12, c: 0.0, h: 0 },
-            'card': { l: 0.16, c: 0.0, h: 0 },
-            'ancillary': { l: 0.08, c: 0.0, h: 0 },
-            'ancillary-content': { l: 0.75, c: 0.0, h: 0 }
+            'primary': { l: 0.72, c: 0.0, h: 0 },
+            'text-strong': { l: 0.92, c: 0.0, h: 0 },
+            'text-weak': { l: 0.75, c: 0.0, h: 0 },
+            'stroke-strong': { l: 0.5, c: 0.0, h: 0 },
+            'stroke-weak': { l: 0.4, c: 0.0, h: 0 },
+            'background': { l: 0.1, c: 0.0, h: 0 },
+            'card': { l: 0.14, c: 0.0, h: 0 },
+            'ancillary': { l: 0.06, c: 0.0, h: 0 },
+            'ancillary-content': { l: 0.9, c: 0.0, h: 0 },
+            ...semanticColors
           },
           vars: { 'border-width': 0, 'radius': 4, 'shadow-opacity': 0 }
         },
         cream: {
           colors: {
-            'primary': { l: 0.5, c: 0.12, h: 30 },
-            'text-strong': { l: 0.25, c: 0.02, h: 50 },
-            'text-weak': { l: 0.4, c: 0.015, h: 50 },
+            'primary': { l: 0.4, c: 0.12, h: 30 },
+            'text-strong': { l: 0.18, c: 0.02, h: 50 },
+            'text-weak': { l: 0.32, c: 0.015, h: 50 },
             'stroke-strong': { l: 0.45, c: 0.015, h: 50 },
             'stroke-weak': { l: 0.55, c: 0.015, h: 50 },
-            'background': { l: 0.97, c: 0.02, h: 80 },
-            'card': { l: 0.99, c: 0.015, h: 80 },
-            'ancillary': { l: 0.95, c: 0.025, h: 80 },
-            'ancillary-content': { l: 0.35, c: 0.02, h: 50 }
+            'background': { l: 0.96, c: 0.02, h: 80 },
+            'card': { l: 0.98, c: 0.015, h: 80 },
+            'ancillary': { l: 0.93, c: 0.025, h: 80 },
+            'ancillary-content': { l: 0.18, c: 0.02, h: 50 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 8, 'shadow-opacity': 0.08 }
         },
         noir: {
           colors: {
-            'primary': { l: 0.99, c: 0.0, h: 0 },
-            'text-strong': { l: 0.98, c: 0.0, h: 0 },
+            'primary': { l: 0.9, c: 0.0, h: 0 },
+            'text-strong': { l: 0.92, c: 0.0, h: 0 },
             'text-weak': { l: 0.75, c: 0.0, h: 0 },
-            'stroke-strong': { l: 0.65, c: 0.0, h: 0 },
-            'stroke-weak': { l: 0.6, c: 0.0, h: 0 },
-            'background': { l: 0.06, c: 0.0, h: 0 },
-            'card': { l: 0.10, c: 0.0, h: 0 },
-            'ancillary': { l: 0.04, c: 0.0, h: 0 },
-            'ancillary-content': { l: 0.85, c: 0.0, h: 0 }
+            'stroke-strong': { l: 0.55, c: 0.0, h: 0 },
+            'stroke-weak': { l: 0.45, c: 0.0, h: 0 },
+            'background': { l: 0.05, c: 0.0, h: 0 },
+            'card': { l: 0.08, c: 0.0, h: 0 },
+            'ancillary': { l: 0.03, c: 0.0, h: 0 },
+            'ancillary-content': { l: 0.9, c: 0.0, h: 0 },
+            ...semanticColors
           },
           vars: { 'border-width': 1, 'radius': 0, 'shadow-opacity': 0 }
         }
@@ -1182,6 +1289,24 @@
           colors[colorName].c = val.c;
           colors[colorName].h = val.h;
         }
+
+        // Auto-generate content colors with proper contrast
+        function ensureContentColor(baseName) {
+          const bg = colors[baseName];
+          const contentName = `${baseName}-content`;
+          if (!preset.colors[contentName]) {
+            // Warning always gets dark text, others depend on background lightness
+            const preferLight = baseName === 'warning' ? false : (bg.l < 0.5);
+            colors[contentName].l = getContrastingL(bg.l, preferLight);
+            colors[contentName].c = bg.c * 0.3;
+            colors[contentName].h = bg.h;
+          }
+        }
+        ensureContentColor('primary');
+        ensureContentColor('info');
+        ensureContentColor('success');
+        ensureContentColor('warning');
+        ensureContentColor('error');
 
         // Apply vars (only the ones specified in preset)
         for (const [varName, val] of Object.entries(preset.vars)) {
@@ -1222,8 +1347,16 @@
           const channel = e.target.dataset.channel;
           colors[colorName][channel] = parseFloat(e.target.value);
           updateCSSVariable(colorName, oklchString(colors[colorName].l, colors[colorName].c, colors[colorName].h));
+          // Auto-update content color when base color changes
           if (['primary', 'info', 'success', 'warning', 'error'].includes(colorName)) {
-            updateContentColors();
+            const bg = colors[colorName];
+            const content = colors[`${colorName}-content`];
+            // Warning always gets dark text, others depend on background lightness
+            const preferLight = colorName === 'warning' ? false : (bg.l < 0.5);
+            content.l = getContrastingL(bg.l, preferLight);
+            content.c = bg.c * 0.3;
+            content.h = bg.h;
+            updateCSSVariable(`${colorName}-content`, oklchString(content.l, content.c, content.h));
           }
           updateConfig();
           checkContrast();
@@ -1294,17 +1427,6 @@
             setTimeout(() => codeBlock.textContent = original, 1000);
           });
         });
-      });
-
-      // Tab switching
-      document.getElementById('demo-tabs').addEventListener('click', (e) => {
-        const tab = e.target.closest('[data-tab]');
-        if (!tab) return;
-        const tabName = tab.dataset.tab;
-        document.querySelectorAll('#demo-tabs [data-tab]').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        document.querySelectorAll('#tab-content [data-tab-content]').forEach(c => c.classList.add('hidden'));
-        document.querySelector(`#tab-content [data-tab-content="${tabName}"]`).classList.remove('hidden');
       });
 
       // Initialize

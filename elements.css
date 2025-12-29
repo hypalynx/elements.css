@@ -758,11 +758,17 @@ dialog:not(.unstyled) h3 {
 /* Tabs */
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: var(--el-border-width) solid var(--el-stroke-weak);
-  gap: 0;
 }
 
-.tabs > * {
+.tabs input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tabs label {
   padding: var(--el-spacing-sm) var(--el-spacing-md);
   border-bottom: 2px solid transparent;
   margin-bottom: calc(-1 * var(--el-border-width));
@@ -771,18 +777,32 @@ dialog:not(.unstyled) h3 {
   color: var(--el-text-weak);
 }
 
-.tabs > *:hover {
+.tabs label:hover {
   color: var(--el-text-strong);
 }
 
-.tabs > *.active,
-.tabs > *[aria-selected="true"] {
+.tabs input[type="radio"]:checked + label {
   border-bottom-color: var(--el-primary);
   color: var(--el-text-strong);
 }
 
-.tabs > * + * {
+.tabs label:not(:first-of-type) {
   border-left: var(--el-border-width) solid var(--el-stroke-weak);
+}
+
+.tabs .tab-panel {
+  display: none;
+  order: 1;
+  width: 100%;
+  padding-top: var(--el-spacing-sm);
+}
+
+.tabs input[type="radio"]:nth-of-type(1):checked ~ .tab-panel:nth-of-type(1),
+.tabs input[type="radio"]:nth-of-type(2):checked ~ .tab-panel:nth-of-type(2),
+.tabs input[type="radio"]:nth-of-type(3):checked ~ .tab-panel:nth-of-type(3),
+.tabs input[type="radio"]:nth-of-type(4):checked ~ .tab-panel:nth-of-type(4),
+.tabs input[type="radio"]:nth-of-type(5):checked ~ .tab-panel:nth-of-type(5) {
+  display: block;
 }
 
 /* Button Group */
