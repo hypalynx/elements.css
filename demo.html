@@ -761,54 +761,87 @@
         return (Ybg - Ytxt) * 100;
       }
 
-      function oklchToLuminance(l) {
-        return Math.pow(l, 2.2);
+      // OKLCH to Linear RGB conversion
+      function oklchToLinearRgb(l, c, h) {
+        // OKLCH to OKLab
+        const hRad = h * Math.PI / 180;
+        const a = c * Math.cos(hRad);
+        const b = c * Math.sin(hRad);
+
+        // OKLab to LMS
+        const l_ = l + 0.3963377774 * a + 0.2158037573 * b;
+        const m_ = l - 0.1055613458 * a - 0.0638541728 * b;
+        const s_ = l - 0.0894841775 * a - 1.2914855480 * b;
+
+        // LMS to Linear sRGB
+        const lms_l = l_ * l_ * l_;
+        const lms_m = m_ * m_ * m_;
+        const lms_s = s_ * s_ * s_;
+
+        return {
+          r: +4.0767416621 * lms_l - 3.3077115913 * lms_m + 0.2309699292 * lms_s,
+          g: -1.2684380046 * lms_l + 2.6097574011 * lms_m - 0.3413193965 * lms_s,
+          b: -0.0041960863 * lms_l - 0.7034186147 * lms_m + 1.7076147010 * lms_s
+        };
       }
 
-      // Check if two lightness values have sufficient contrast
-      function hasGoodContrast(fgL, bgL) {
-        const fgLum = oklchToLuminance(fgL);
-        const bgLum = oklchToLuminance(bgL);
+      // Compute relative luminance from OKLCH color
+      function oklchLuminance(l, c, h) {
+        const rgb = oklchToLinearRgb(l, c, h);
+        // Clamp to gamut before computing luminance
+        const rc = Math.max(0, Math.min(1, rgb.r));
+        const gc = Math.max(0, Math.min(1, rgb.g));
+        const bc = Math.max(0, Math.min(1, rgb.b));
+        return 0.2126 * rc + 0.7152 * gc + 0.0722 * bc;
+      }
+
+      // Check if two colors have sufficient contrast
+      // fg and bg are color objects with {l, c, h} properties
+      function hasGoodContrast(fg, bg) {
+        const fgLum = oklchLuminance(fg.l, fg.c, fg.h);
+        const bgLum = oklchLuminance(bg.l, bg.c, bg.h);
         const wcag = wcagContrast(fgLum, bgLum);
         const apca = Math.abs(apcaContrast(fgLum, bgLum));
         return wcag >= 4.5 && apca >= 60;
       }
 
       // Get a foreground lightness that contrasts well with background
-      function getContrastingL(bgL, preferLight) {
+      // bg is a color object {l, c, h}, returns lightness value
+      // contentC and contentH are the chroma and hue for the content color being generated
+      function getContrastingL(bg, preferLight, contentC = 0, contentH = 0) {
         if (preferLight) {
           // For dark backgrounds, find light foreground
-          for (let l = 0.95; l >= 0.7; l -= 0.05) {
-            if (hasGoodContrast(l, bgL)) return l;
+          for (let l = 0.98; l >= 0.7; l -= 0.02) {
+            if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
           }
-          return 0.95;
+          return 0.98;
         } else {
           // For light backgrounds, find dark foreground
-          for (let l = 0.15; l <= 0.4; l += 0.05) {
-            if (hasGoodContrast(l, bgL)) return l;
+          for (let l = 0.10; l <= 0.4; l += 0.02) {
+            if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
           }
-          return 0.15;
+          return 0.10;
         }
       }
 
       function checkContrast() {
         const pairs = [
-          { name: 'Text', fg: colors['text-strong'].l, bg: colors['background'].l },
-          { name: 'Text weak', fg: colors['text-weak'].l, bg: colors['background'].l },
-          { name: 'Text on card', fg: colors['text-strong'].l, bg: colors['card'].l },
-          { name: 'Primary on bg', fg: colors['primary'].l, bg: colors['background'].l },
-          { name: 'Primary btn', fg: colors['primary-content'].l, bg: colors['primary'].l },
-          { name: 'Info btn', fg: colors['info-content'].l, bg: colors['info'].l },
-          { name: 'Success btn', fg: colors['success-content'].l, bg: colors['success'].l },
-          { name: 'Warning btn', fg: colors['warning-content'].l, bg: colors['warning'].l },
-          { name: 'Error btn', fg: colors['error-content'].l, bg: colors['error'].l },
-          { name: 'Sidebar', fg: colors['ancillary-content'].l, bg: colors['ancillary'].l }
+          { name: 'Text', fg: colors['text-strong'], bg: colors['background'] },
+          { name: 'Text weak', fg: colors['text-weak'], bg: colors['background'] },
+          { name: 'Text on card', fg: colors['text-strong'], bg: colors['card'] },
+          { name: 'Primary on bg', fg: colors['primary'], bg: colors['background'] },
+          { name: 'Primary btn', fg: colors['primary-content'], bg: colors['primary'] },
+          { name: 'Info btn', fg: colors['info-content'], bg: colors['info'] },
+          { name: 'Success btn', fg: colors['success-content'], bg: colors['success'] },
+          { name: 'Warning btn', fg: colors['warning-content'], bg: colors['warning'] },
+          { name: 'Error btn', fg: colors['error-content'], bg: colors['error'] },
+          { name: 'Sidebar', fg: colors['ancillary-content'], bg: colors['ancillary'] }
         ];
 
         const results = [];
         for (const pair of pairs) {
-          const fgLum = oklchToLuminance(pair.fg);
-          const bgLum = oklchToLuminance(pair.bg);
+          const fgLum = oklchLuminance(pair.fg.l, pair.fg.c, pair.fg.h);
+          const bgLum = oklchLuminance(pair.bg.l, pair.bg.c, pair.bg.h);
           const wcag = wcagContrast(fgLum, bgLum);
           const apca = Math.abs(apcaContrast(fgLum, bgLum));
           const pass = wcag >= 4.5 && apca >= 60;
@@ -1004,20 +1037,20 @@
         colors['background'].h = tintBg ? primaryHue : 0;
 
         // 2. Text colors - ensure contrast with background
-        colors['text-strong'].l = getContrastingL(colors['background'].l, isDarkMode);
         colors['text-strong'].c = textChroma;
         colors['text-strong'].h = primaryHue;
+        colors['text-strong'].l = getContrastingL(colors['background'], isDarkMode, colors['text-strong'].c, colors['text-strong'].h);
 
         // Text weak needs contrast too - find a value that passes
-        colors['text-weak'].l = isDarkMode
-          ? getContrastingL(colors['background'].l, true) - 0.15
-          : getContrastingL(colors['background'].l, false) + 0.1;
-        // Verify and fix if needed
-        if (!hasGoodContrast(colors['text-weak'].l, colors['background'].l)) {
-          colors['text-weak'].l = getContrastingL(colors['background'].l, isDarkMode);
-        }
         colors['text-weak'].c = textChroma;
         colors['text-weak'].h = primaryHue;
+        colors['text-weak'].l = isDarkMode
+          ? getContrastingL(colors['background'], true, colors['text-weak'].c, colors['text-weak'].h) - 0.15
+          : getContrastingL(colors['background'], false, colors['text-weak'].c, colors['text-weak'].h) + 0.1;
+        // Verify and fix if needed
+        if (!hasGoodContrast(colors['text-weak'], colors['background'])) {
+          colors['text-weak'].l = getContrastingL(colors['background'], isDarkMode, colors['text-weak'].c, colors['text-weak'].h);
+        }
 
         colors['stroke-strong'].l = isDarkMode ? 0.5 + Math.random() * 0.1 : 0.45 + Math.random() * 0.1;
         colors['stroke-strong'].c = textChroma;
@@ -1033,8 +1066,8 @@
         colors['card'].c = colors['background'].c * 0.8;
         colors['card'].h = colors['background'].h;
         // Verify text-strong contrasts with card
-        if (!hasGoodContrast(colors['text-strong'].l, colors['card'].l)) {
-          colors['text-strong'].l = getContrastingL(colors['card'].l, isDarkMode);
+        if (!hasGoodContrast(colors['text-strong'], colors['card'])) {
+          colors['text-strong'].l = getContrastingL(colors['card'], isDarkMode, colors['text-strong'].c, colors['text-strong'].h);
         }
 
         // 4. Ancillary surface and content
@@ -1043,9 +1076,9 @@
           : colors['background'].l - 0.03 - Math.random() * 0.02;
         colors['ancillary'].c = colors['background'].c * 1.2;
         colors['ancillary'].h = colors['background'].h;
-        colors['ancillary-content'].l = getContrastingL(colors['ancillary'].l, isDarkMode);
         colors['ancillary-content'].c = textChroma;
         colors['ancillary-content'].h = primaryHue;
+        colors['ancillary-content'].l = getContrastingL(colors['ancillary'], isDarkMode, colors['ancillary-content'].c, colors['ancillary-content'].h);
 
         // 5. Primary - must contrast with background
         colors['primary'].h = primaryHue;
@@ -1054,7 +1087,7 @@
         if (isDarkMode) {
           // Dark bg: primary should be lighter
           for (let l = 0.6; l <= 0.75; l += 0.05) {
-            if (hasGoodContrast(l, colors['background'].l)) {
+            if (hasGoodContrast({l, c: colors['primary'].c, h: colors['primary'].h}, colors['background'])) {
               colors['primary'].l = l + Math.random() * 0.05;
               break;
             }
@@ -1062,16 +1095,16 @@
         } else {
           // Light bg: primary should be darker
           for (let l = 0.5; l >= 0.35; l -= 0.05) {
-            if (hasGoodContrast(l, colors['background'].l)) {
+            if (hasGoodContrast({l, c: colors['primary'].c, h: colors['primary'].h}, colors['background'])) {
               colors['primary'].l = l - Math.random() * 0.05;
               break;
             }
           }
         }
         // Primary content
-        colors['primary-content'].l = getContrastingL(colors['primary'].l, colors['primary'].l < 0.5);
         colors['primary-content'].c = colors['primary'].c * 0.3;
         colors['primary-content'].h = colors['primary'].h;
+        colors['primary-content'].l = getContrastingL(colors['primary'], colors['primary'].l < 0.5, colors['primary-content'].c, colors['primary-content'].h);
 
         // 6. Semantic colors - all need contrasting content
         const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.06;
@@ -1081,10 +1114,13 @@
           colors[name].c = semanticChroma;
           // Use mid-range lightness that allows for contrasting content
           colors[name].l = 0.45 + Math.random() * 0.1;
-          // Content color
-          colors[`${name}-content`].l = getContrastingL(colors[name].l, colors[name].l < 0.5);
-          colors[`${name}-content`].c = colors[name].c * 0.3;
-          colors[`${name}-content`].h = colors[name].h;
+          // Content color - use accurate contrast check
+          const contentC = colors[name].c * 0.3;
+          const contentH = colors[name].h;
+          const preferLight = colors[name].l < 0.5;
+          colors[`${name}-content`].l = getContrastingL(colors[name], preferLight, contentC, contentH);
+          colors[`${name}-content`].c = contentC;
+          colors[`${name}-content`].h = contentH;
         }
 
         setSemanticColor('info', 210, 30);
@@ -1095,9 +1131,11 @@
         colors['warning'].h = 75 + Math.random() * 20;
         colors['warning'].c = semanticChroma;
         colors['warning'].l = 0.75 + Math.random() * 0.1; // Light yellow/orange
-        colors['warning-content'].l = getContrastingL(colors['warning'].l, false); // Dark text
-        colors['warning-content'].c = colors['warning'].c * 0.3;
-        colors['warning-content'].h = colors['warning'].h;
+        const warningContentC = colors['warning'].c * 0.3;
+        const warningContentH = colors['warning'].h;
+        colors['warning-content'].l = getContrastingL(colors['warning'], false, warningContentC, warningContentH); // Dark text
+        colors['warning-content'].c = warningContentC;
+        colors['warning-content'].h = warningContentH;
 
         vars['border-width'].value = Math.floor(Math.random() * 2);
         vars['radius'].value = radius;
@@ -1297,8 +1335,10 @@
           if (!preset.colors[contentName]) {
             // Warning always gets dark text, others depend on background lightness
             const preferLight = baseName === 'warning' ? false : (bg.l < 0.5);
-            colors[contentName].l = getContrastingL(bg.l, preferLight);
-            colors[contentName].c = bg.c * 0.3;
+            const contentC = bg.c * 0.3;
+            const contentH = bg.h;
+            colors[contentName].l = getContrastingL(bg, preferLight, contentC, contentH);
+            colors[contentName].c = contentC;
             colors[contentName].h = bg.h;
           }
         }
@@ -1351,10 +1391,11 @@
           if (['primary', 'info', 'success', 'warning', 'error'].includes(colorName)) {
             const bg = colors[colorName];
             const content = colors[`${colorName}-content`];
-            // Warning always gets dark text, others depend on background lightness
             const preferLight = colorName === 'warning' ? false : (bg.l < 0.5);
-            content.l = getContrastingL(bg.l, preferLight);
-            content.c = bg.c * 0.3;
+            const contentC = bg.c * 0.3;
+            const contentH = bg.h;
+            content.l = getContrastingL(bg, preferLight, contentC, contentH);
+            content.c = contentC;
             content.h = bg.h;
             updateCSSVariable(`${colorName}-content`, oklchString(content.l, content.c, content.h));
           }
