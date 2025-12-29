@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>elements.css Demo</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Recursive:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/elements.css" type="text/css" media="all">
   </head>
   <body>
@@ -22,6 +23,12 @@
         <option value="carbon">Carbon</option>
         <option value="cream">Cream</option>
         <option value="noir">Noir</option>
+      </select>
+      <select id="font-family">
+        <option value="'Inter'">Inter</option>
+        <option value="'Manrope'">Manrope</option>
+        <option value="'Libre Baskerville'">Libre Baskerville</option>
+        <option value="'Recursive'">Recursive</option>
       </select>
       <div class="flex gap-sm">
         <button id="randomize" class="flex-1">Random</button>
@@ -84,16 +91,28 @@
               <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="primary" data-channel="h"></label>
             </div>
             <div class="flex flex-col gap-xs">
-              <label class="text-sm">Foreground</label>
-              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="foreground" data-channel="l"></label>
-              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="foreground" data-channel="c"></label>
-              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="foreground" data-channel="h"></label>
+              <label class="text-sm">Text Strong</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="text-strong" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="text-strong" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="text-strong" data-channel="h"></label>
             </div>
             <div class="flex flex-col gap-xs">
-              <label class="text-sm">Foreground Faded</label>
-              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="foreground-faded" data-channel="l"></label>
-              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="foreground-faded" data-channel="c"></label>
-              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="foreground-faded" data-channel="h"></label>
+              <label class="text-sm">Text Weak</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="text-weak" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="text-weak" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="text-weak" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Stroke Strong</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="stroke-strong" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="stroke-strong" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="stroke-strong" data-channel="h"></label>
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="text-sm">Stroke Weak</label>
+              <label class="text-sm flex gap-sm items-center">L <input class="flex-1" type="range" min="0" max="1" step="0.01" data-color="stroke-weak" data-channel="l"></label>
+              <label class="text-sm flex gap-sm items-center">C <input class="flex-1" type="range" min="0" max="0.4" step="0.01" data-color="stroke-weak" data-channel="c"></label>
+              <label class="text-sm flex gap-sm items-center">H <input class="flex-1" type="range" min="0" max="360" step="1" data-color="stroke-weak" data-channel="h"></label>
             </div>
             <div class="flex flex-col gap-xs">
               <label class="text-sm">Background</label>
@@ -196,6 +215,7 @@
     </aside>
 
     <main class="ml-80 p-lg flex flex-col gap-lg">
+      <div id="contrast-status" class="badge" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;"></div>
       <h1>elements.css</h1>
       <p>A CSS framework that styles HTML elements directly. Customize the variables and copy the config into your project.</p>
       <p class="text-sm" style="opacity: 0.7;">Filesize: <span id="filesize">...</span> (<span id="filesize-gzip">...</span> gzipped)</p>
@@ -229,13 +249,15 @@
 
         <div class="card shadow-md flex flex-col min-h-48" data-component="link">
           <h3 class="flex">
-            <span class="flex-1">Link</span>
+            <span class="flex-1">Links</span>
             <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
           </h3>
-          <div class="flex-1 flex items-center justify-center" data-preview>
-            <a href="#">This is a link</a>
+          <div class="flex-1 flex flex-col items-center justify-center gap-sm" data-preview>
+            <a href="#">Primary link</a>
+            <a href="#" class="link-secondary">Secondary link</a>
           </div>
-          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;a href="#"&gt;This is a link&lt;/a&gt;</code></pre>
+          <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;a href="#"&gt;Primary link&lt;/a&gt;
+&lt;a href="#" class="link-secondary"&gt;Secondary link&lt;/a&gt;</code></pre>
         </div>
 
         <div class="card shadow-md flex flex-col min-h-48 col-span-2" data-component="buttons">
@@ -326,14 +348,18 @@
           </h3>
           <div class="flex-1 flex items-center justify-center" data-preview>
             <select>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              <option value="">Select a drink</option>
+              <option value="coffee">Coffee</option>
+              <option value="tea">Tea</option>
+              <option value="water">Water</option>
+              <option value="juice">Orange Juice</option>
+              <option value="soda">Sparkling Water</option>
             </select>
           </div>
           <pre class="hidden flex-1 flex items-center justify-center" data-code><code>&lt;select&gt;
-  &lt;option&gt;Option 1&lt;/option&gt;
-  &lt;option&gt;Option 2&lt;/option&gt;
+  &lt;option value=""&gt;Select a drink&lt;/option&gt;
+  &lt;option value="coffee"&gt;Coffee&lt;/option&gt;
+  &lt;option value="tea"&gt;Tea&lt;/option&gt;
 &lt;/select&gt;</code></pre>
         </div>
 
@@ -461,21 +487,39 @@
           </h3>
           <div class="flex-1 flex items-center justify-center" data-preview>
             <button onclick="document.getElementById('demo-dialog').showModal()">Open Dialog</button>
-            <dialog id="demo-dialog">
+            <dialog id="demo-dialog" closedby="any">
               <h3>Dialog Title</h3>
-              <p>This is a native HTML dialog element with backdrop blur.</p>
+              <p>This is a native HTML dialog element with backdrop blur. Click outside or press Escape to close.</p>
               <form method="dialog" class="flex gap-sm justify-center">
                 <button>Close</button>
               </form>
             </dialog>
           </div>
-          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;dialog id="my-dialog"&gt;
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;dialog id="my-dialog" closedby="any"&gt;
   &lt;h3&gt;Title&lt;/h3&gt;
   &lt;p&gt;Content&lt;/p&gt;
   &lt;form method="dialog"&gt;
     &lt;button&gt;Close&lt;/button&gt;
   &lt;/form&gt;
 &lt;/dialog&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="popover">
+          <h3 class="flex">
+            <span class="flex-1">Popover</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center gap-md" data-preview>
+            <button id="btn-popover" popovertarget="demo-popover">Popover</button>
+            <div id="demo-popover" popover anchor="btn-popover">This is a popover with more content.</div>
+            <button id="btn-hint" popovertarget="demo-hint">Hint</button>
+            <div id="demo-hint" popover="hint" anchor="btn-hint">Quick hint tooltip</div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;button id="btn1" popovertarget="pop1"&gt;Open&lt;/button&gt;
+&lt;div id="pop1" popover anchor="btn1"&gt;Content&lt;/div&gt;
+
+&lt;button id="btn2" popovertarget="hint1"&gt;Hint&lt;/button&gt;
+&lt;div id="hint1" popover="hint" anchor="btn2"&gt;Hint&lt;/div&gt;</code></pre>
         </div>
 
         <div class="card shadow-md flex flex-col min-h-48" data-component="radio-card">
@@ -611,6 +655,51 @@
   &lt;button&gt;Right&lt;/button&gt;
 &lt;/div&gt;</code></pre>
         </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="tabs">
+          <h3 class="flex">
+            <span class="flex-1">Tabs</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col justify-center gap-sm" data-preview>
+            <div class="tabs">
+              <span class="active">Tab 1</span>
+              <span>Tab 2</span>
+              <span>Tab 3</span>
+            </div>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="tabs"&gt;
+  &lt;span class="active"&gt;Tab 1&lt;/span&gt;
+  &lt;span&gt;Tab 2&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="hr">
+          <h3 class="flex">
+            <span class="flex-1">Horizontal Rule</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex flex-col justify-center" data-preview>
+            <p>Content above</p>
+            <hr>
+            <p>Content below</p>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;hr&gt;</code></pre>
+        </div>
+
+        <div class="card shadow-md flex flex-col min-h-48" data-component="inline-accordion">
+          <h3 class="flex">
+            <span class="flex-1">Inline Accordion</span>
+            <a class="text-sm cursor-pointer" data-toggle-code>show code</a>
+          </h3>
+          <div class="flex-1 flex items-center justify-center" data-preview>
+            <p>Click <details class="inline"><summary>here</summary><span>Hidden content revealed!</span></details> to expand.</p>
+          </div>
+          <pre class="hidden flex-1 flex items-center" data-code><code>&lt;details class="inline"&gt;
+  &lt;summary&gt;here&lt;/summary&gt;
+  &lt;span&gt;Content&lt;/span&gt;
+&lt;/details&gt;</code></pre>
+        </div>
       </div>
 
       <footer class="text-sm" style="opacity: 0.6; margin-top: var(--spacing-lg);">
@@ -621,8 +710,10 @@
     <script>
       const colors = {
         'primary': { l: 0.6, c: 0.15, h: 250 },
-        'foreground': { l: 0.25, c: 0.02, h: 250 },
-        'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
+        'text-strong': { l: 0.25, c: 0.02, h: 250 },
+        'text-weak': { l: 0.40, c: 0.01, h: 250 },
+        'stroke-strong': { l: 0.45, c: 0.01, h: 250 },
+        'stroke-weak': { l: 0.55, c: 0.01, h: 250 },
         'background': { l: 0.985, c: 0.005, h: 250 },
         'card': { l: 1.0, c: 0.0, h: 250 },
         'ancillary': { l: 0.97, c: 0.008, h: 250 },
@@ -632,6 +723,45 @@
         'warning': { l: 0.65, c: 0.15, h: 85 },
         'error': { l: 0.55, c: 0.18, h: 25 }
       };
+
+      function srgbLuminance(r, g, b) {
+        const [rs, gs, bs] = [r, g, b].map(c => {
+          c = c / 255;
+          return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+      }
+
+      function wcagContrast(lum1, lum2) {
+        const lighter = Math.max(lum1, lum2);
+        const darker = Math.min(lum1, lum2);
+        return (lighter + 0.05) / (darker + 0.05);
+      }
+
+      function apcaContrast(txtY, bgY) {
+        const Ytxt = Math.pow(txtY, 0.56);
+        const Ybg = Math.pow(bgY, 0.56);
+        return (Ybg - Ytxt) * 100;
+      }
+
+      function oklchToLuminance(l) {
+        return Math.pow(l, 2.2);
+      }
+
+      function checkContrast() {
+        const textL = oklchToLuminance(colors['text-strong'].l);
+        const bgL = oklchToLuminance(colors['background'].l);
+        const wcag = wcagContrast(textL, bgL);
+        const apca = Math.abs(apcaContrast(textL, bgL));
+
+        const status = document.getElementById('contrast-status');
+        const isLowContrast = wcag < 4.5 || apca < 60;
+
+        status.className = isLowContrast ? 'badge badge-warning' : 'badge badge-success';
+        status.textContent = isLowContrast
+          ? `⚠ Low Contrast: WCAG ${wcag.toFixed(1)}:1 | APCA Lc ${apca.toFixed(0)}`
+          : `✓ Contrast OK: WCAG ${wcag.toFixed(1)}:1 | APCA Lc ${apca.toFixed(0)}`;
+      }
 
       const vars = {
         'border-width': { value: 1, unit: 'px' },
@@ -669,6 +799,7 @@
         }
         updateContentColors();
         updateConfig();
+        checkContrast();
       }
 
       function updateContentColors() {
@@ -706,8 +837,10 @@
   /* Colors */
   --el-primary: ${oklchString(colors['primary'].l, colors['primary'].c, colors['primary'].h)};
   --el-primary-content: ${oklchString(primaryContentL, colors['primary'].c * 0.5, colors['primary'].h)};
-  --el-foreground: ${oklchString(colors['foreground'].l, colors['foreground'].c, colors['foreground'].h)};
-  --el-foreground-faded: ${oklchString(colors['foreground-faded'].l, colors['foreground-faded'].c, colors['foreground-faded'].h)};
+  --el-text-strong: ${oklchString(colors['text-strong'].l, colors['text-strong'].c, colors['text-strong'].h)};
+  --el-text-weak: ${oklchString(colors['text-weak'].l, colors['text-weak'].c, colors['text-weak'].h)};
+  --el-stroke-strong: ${oklchString(colors['stroke-strong'].l, colors['stroke-strong'].c, colors['stroke-strong'].h)};
+  --el-stroke-weak: ${oklchString(colors['stroke-weak'].l, colors['stroke-weak'].c, colors['stroke-weak'].h)};
   --el-background: ${oklchString(colors['background'].l, colors['background'].c, colors['background'].h)};
   --el-card: ${oklchString(colors['card'].l, colors['card'].c, colors['card'].h)};
   --el-ancillary: ${oklchString(colors['ancillary'].l, colors['ancillary'].c, colors['ancillary'].h)};
@@ -805,12 +938,16 @@
 
         if (isDarkMode) {
           colors['background'].l = highContrast ? 0.08 : 0.12 + Math.random() * 0.08;
-          colors['foreground'].l = highContrast ? 0.98 : 0.88 + Math.random() * 0.08;
-          colors['foreground-faded'].l = 0.5 + Math.random() * 0.1;
+          colors['text-strong'].l = highContrast ? 0.98 : 0.88 + Math.random() * 0.08;
+          colors['text-weak'].l = 0.65 + Math.random() * 0.1;
+          colors['stroke-strong'].l = 0.55 + Math.random() * 0.1;
+          colors['stroke-weak'].l = 0.5 + Math.random() * 0.1;
         } else {
           colors['background'].l = highContrast ? 1.0 : 0.94 + Math.random() * 0.05;
-          colors['foreground'].l = highContrast ? 0.05 : 0.15 + Math.random() * 0.1;
-          colors['foreground-faded'].l = 0.45 + Math.random() * 0.15;
+          colors['text-strong'].l = highContrast ? 0.05 : 0.15 + Math.random() * 0.1;
+          colors['text-weak'].l = 0.35 + Math.random() * 0.1;
+          colors['stroke-strong'].l = 0.4 + Math.random() * 0.1;
+          colors['stroke-weak'].l = 0.45 + Math.random() * 0.15;
         }
 
         const tintBg = paletteOpt === 'monochrome' ? false : Math.random() > 0.4;
@@ -841,13 +978,17 @@
         } else {
           colors['ancillary-content'].l = 0.3 + Math.random() * 0.1;
         }
-        colors['ancillary-content'].c = colors['foreground'].c;
+        colors['ancillary-content'].c = colors['text-strong'].c;
         colors['ancillary-content'].h = primaryHue;
 
-        colors['foreground'].c = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
-        colors['foreground'].h = primaryHue;
-        colors['foreground-faded'].c = colors['foreground'].c;
-        colors['foreground-faded'].h = primaryHue;
+        colors['text-strong'].c = paletteOpt === 'monochrome' ? 0 : Math.random() * 0.015;
+        colors['text-strong'].h = primaryHue;
+        colors['text-weak'].c = colors['text-strong'].c;
+        colors['text-weak'].h = primaryHue;
+        colors['stroke-strong'].c = colors['text-strong'].c;
+        colors['stroke-strong'].h = primaryHue;
+        colors['stroke-weak'].c = colors['text-strong'].c;
+        colors['stroke-weak'].h = primaryHue;
 
         // Randomize semantic colors
         const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.08;
@@ -881,8 +1022,10 @@
       const defaults = {
         colors: {
           'primary': { l: 0.6, c: 0.15, h: 250 },
-          'foreground': { l: 0.25, c: 0.02, h: 250 },
-          'foreground-faded': { l: 0.55, c: 0.01, h: 250 },
+          'text-strong': { l: 0.25, c: 0.02, h: 250 },
+          'text-weak': { l: 0.40, c: 0.01, h: 250 },
+          'stroke-strong': { l: 0.45, c: 0.01, h: 250 },
+          'stroke-weak': { l: 0.55, c: 0.01, h: 250 },
           'background': { l: 0.985, c: 0.005, h: 250 },
           'card': { l: 1.0, c: 0.0, h: 250 },
           'ancillary': { l: 0.97, c: 0.008, h: 250 },
@@ -911,8 +1054,10 @@
         default: {
           colors: {
             'primary': { l: 0.55, c: 0.18, h: 250 },
-            'foreground': { l: 0.2, c: 0.015, h: 250 },
-            'foreground-faded': { l: 0.5, c: 0.01, h: 250 },
+            'text-strong': { l: 0.2, c: 0.015, h: 250 },
+            'text-weak': { l: 0.35, c: 0.01, h: 250 },
+            'stroke-strong': { l: 0.4, c: 0.01, h: 250 },
+            'stroke-weak': { l: 0.5, c: 0.01, h: 250 },
             'background': { l: 0.985, c: 0.008, h: 250 },
             'card': { l: 1.0, c: 0.0, h: 250 },
             'ancillary': { l: 0.97, c: 0.01, h: 250 },
@@ -923,8 +1068,10 @@
         slate: {
           colors: {
             'primary': { l: 0.45, c: 0.02, h: 250 },
-            'foreground': { l: 0.15, c: 0.01, h: 250 },
-            'foreground-faded': { l: 0.55, c: 0.005, h: 250 },
+            'text-strong': { l: 0.15, c: 0.01, h: 250 },
+            'text-weak': { l: 0.35, c: 0.005, h: 250 },
+            'stroke-strong': { l: 0.45, c: 0.005, h: 250 },
+            'stroke-weak': { l: 0.55, c: 0.005, h: 250 },
             'background': { l: 0.98, c: 0.005, h: 250 },
             'card': { l: 0.99, c: 0.003, h: 250 },
             'ancillary': { l: 0.96, c: 0.006, h: 250 },
@@ -935,8 +1082,10 @@
         ocean: {
           colors: {
             'primary': { l: 0.5, c: 0.15, h: 230 },
-            'foreground': { l: 0.2, c: 0.02, h: 220 },
-            'foreground-faded': { l: 0.5, c: 0.015, h: 220 },
+            'text-strong': { l: 0.2, c: 0.02, h: 220 },
+            'text-weak': { l: 0.35, c: 0.015, h: 220 },
+            'stroke-strong': { l: 0.4, c: 0.015, h: 220 },
+            'stroke-weak': { l: 0.5, c: 0.015, h: 220 },
             'background': { l: 0.98, c: 0.012, h: 220 },
             'card': { l: 0.99, c: 0.008, h: 220 },
             'ancillary': { l: 0.96, c: 0.015, h: 220 },
@@ -947,8 +1096,10 @@
         forest: {
           colors: {
             'primary': { l: 0.5, c: 0.14, h: 145 },
-            'foreground': { l: 0.2, c: 0.02, h: 145 },
-            'foreground-faded': { l: 0.5, c: 0.015, h: 145 },
+            'text-strong': { l: 0.2, c: 0.02, h: 145 },
+            'text-weak': { l: 0.35, c: 0.015, h: 145 },
+            'stroke-strong': { l: 0.4, c: 0.015, h: 145 },
+            'stroke-weak': { l: 0.5, c: 0.015, h: 145 },
             'background': { l: 0.98, c: 0.01, h: 120 },
             'card': { l: 0.99, c: 0.006, h: 120 },
             'ancillary': { l: 0.96, c: 0.012, h: 120 },
@@ -959,8 +1110,10 @@
         midnight: {
           colors: {
             'primary': { l: 0.65, c: 0.15, h: 250 },
-            'foreground': { l: 0.92, c: 0.01, h: 250 },
-            'foreground-faded': { l: 0.55, c: 0.015, h: 250 },
+            'text-strong': { l: 0.92, c: 0.01, h: 250 },
+            'text-weak': { l: 0.7, c: 0.01, h: 250 },
+            'stroke-strong': { l: 0.6, c: 0.015, h: 250 },
+            'stroke-weak': { l: 0.55, c: 0.015, h: 250 },
             'background': { l: 0.15, c: 0.025, h: 260 },
             'card': { l: 0.18, c: 0.02, h: 260 },
             'ancillary': { l: 0.12, c: 0.03, h: 260 },
@@ -971,8 +1124,10 @@
         carbon: {
           colors: {
             'primary': { l: 0.65, c: 0.0, h: 0 },
-            'foreground': { l: 0.9, c: 0.0, h: 0 },
-            'foreground-faded': { l: 0.5, c: 0.0, h: 0 },
+            'text-strong': { l: 0.9, c: 0.0, h: 0 },
+            'text-weak': { l: 0.7, c: 0.0, h: 0 },
+            'stroke-strong': { l: 0.55, c: 0.0, h: 0 },
+            'stroke-weak': { l: 0.5, c: 0.0, h: 0 },
             'background': { l: 0.12, c: 0.0, h: 0 },
             'card': { l: 0.16, c: 0.0, h: 0 },
             'ancillary': { l: 0.08, c: 0.0, h: 0 },
@@ -983,8 +1138,10 @@
         cream: {
           colors: {
             'primary': { l: 0.5, c: 0.12, h: 30 },
-            'foreground': { l: 0.25, c: 0.02, h: 50 },
-            'foreground-faded': { l: 0.55, c: 0.015, h: 50 },
+            'text-strong': { l: 0.25, c: 0.02, h: 50 },
+            'text-weak': { l: 0.4, c: 0.015, h: 50 },
+            'stroke-strong': { l: 0.45, c: 0.015, h: 50 },
+            'stroke-weak': { l: 0.55, c: 0.015, h: 50 },
             'background': { l: 0.97, c: 0.02, h: 80 },
             'card': { l: 0.99, c: 0.015, h: 80 },
             'ancillary': { l: 0.95, c: 0.025, h: 80 },
@@ -995,8 +1152,10 @@
         noir: {
           colors: {
             'primary': { l: 0.99, c: 0.0, h: 0 },
-            'foreground': { l: 0.98, c: 0.0, h: 0 },
-            'foreground-faded': { l: 0.6, c: 0.0, h: 0 },
+            'text-strong': { l: 0.98, c: 0.0, h: 0 },
+            'text-weak': { l: 0.75, c: 0.0, h: 0 },
+            'stroke-strong': { l: 0.65, c: 0.0, h: 0 },
+            'stroke-weak': { l: 0.6, c: 0.0, h: 0 },
             'background': { l: 0.06, c: 0.0, h: 0 },
             'card': { l: 0.10, c: 0.0, h: 0 },
             'ancillary': { l: 0.04, c: 0.0, h: 0 },
@@ -1060,6 +1219,7 @@
             updateContentColors();
           }
           updateConfig();
+          checkContrast();
         });
       });
 
@@ -1092,6 +1252,9 @@
       });
       document.getElementById('randomize').addEventListener('click', randomize);
       document.getElementById('reset').addEventListener('click', reset);
+      document.getElementById('font-family').addEventListener('change', (e) => {
+        document.body.style.fontFamily = e.target.value + ', sans-serif';
+      });
 
       // Toggle code/preview
       document.querySelectorAll('[data-toggle-code]').forEach(link => {
@@ -1129,6 +1292,7 @@
       // Initialize
       initSliders();
       updateConfig();
+      checkContrast();
 
       // Fetch and display filesize
       fetch('/elements.css').then(r => r.text()).then(css => {
