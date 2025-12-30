@@ -22,14 +22,14 @@
   --el-ancillary-content: oklch(0.35 0 0);
 
   /* Semantic Colors */
-  --el-info: oklch(0.55 0.15 230);
-  --el-info-content: oklch(0.98 0 0);
-  --el-success: oklch(0.55 0.15 145);
-  --el-success-content: oklch(0.98 0 0);
-  --el-warning: oklch(0.65 0.15 85);
-  --el-warning-content: oklch(0.25 0 0);
-  --el-error: oklch(0.55 0.18 25);
-  --el-error-content: oklch(0.98 0 0);
+  --el-info: oklch(0.40 0.12 230);
+  --el-info-content: oklch(0.95 0.04 230);
+  --el-success: oklch(0.40 0.12 145);
+  --el-success-content: oklch(0.95 0.04 145);
+  --el-warning: oklch(0.82 0.12 85);
+  --el-warning-content: oklch(0.15 0.04 85);
+  --el-error: oklch(0.40 0.15 25);
+  --el-error-content: oklch(0.95 0.05 25);
 
   /* Spacing */
   --el-spacing-xs: 0.25rem;
@@ -317,6 +317,15 @@ select:not(.unstyled) option::checkmark {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.input-password label:hover {
+  opacity: 0.7;
+}
+
+.input-password label:active {
+  transform: translateY(-50%) scale(0.9);
 }
 
 .input-password:has(input[type="checkbox"]:checked) label {
@@ -336,12 +345,22 @@ input[type="search"]:not(.unstyled) {
 input[type="search"]:not(.unstyled)::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 256 256' fill='%23666'%3E%3Cpath d='M165.66 101.66 139.31 128l26.35 26.34a8 8 0 0 1-11.32 11.32L128 139.31l-26.34 26.35a8 8 0 0 1-11.32-11.32L116.69 128l-26.35-26.34a8 8 0 0 1 11.32-11.32L128 116.69l26.34-26.35a8 8 0 0 1 11.32 11.32ZM232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104Zm-16 0a88 88 0 1 0-88 88 88.1 88.1 0 0 0 88-88Z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 256 256' fill='%23666'%3E%3Cpath d='M205.66 194.34a8 8 0 0 1-11.32 11.32L128 139.31l-66.34 66.35a8 8 0 0 1-11.32-11.32L116.69 128 50.34 61.66a8 8 0 0 1 11.32-11.32L128 116.69l66.34-66.35a8 8 0 0 1 11.32 11.32L139.31 128Z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
+  opacity: 0.6;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+input[type="search"]:not(.unstyled)::-webkit-search-cancel-button:hover {
+  opacity: 1;
+}
+
+input[type="search"]:not(.unstyled)::-webkit-search-cancel-button:active {
+  transform: scale(0.9);
 }
 
 input[type="search"]:not(.unstyled)::-webkit-search-decoration {
@@ -663,9 +682,11 @@ dialog:not(.unstyled) h3 {
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.5rem;
+  justify-content: center;
+  padding: 0.1875rem 0.5rem 0.25rem;
   font-size: 0.75rem;
   font-weight: 500;
+  line-height: 1;
   border-radius: calc(var(--el-radius) * 2);
   background: var(--el-primary);
   color: var(--el-primary-content);
@@ -694,7 +715,23 @@ dialog:not(.unstyled) h3 {
 
 .alert svg {
   flex-shrink: 0;
-  margin-top: 0.125rem;
+  margin-top: 0.1875rem;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.alert-title {
+  font-weight: 600;
+  color: inherit;
+}
+
+.alert-body {
+  color: inherit;
+  opacity: 0.9;
 }
 
 .alert-info {

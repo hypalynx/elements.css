@@ -595,24 +595,39 @@
           <div class="flex-1 flex flex-col justify-center gap-sm" data-preview>
             <div class="alert alert-info">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg>
-              <span>This is an info alert.</span>
+              <div class="alert-content">
+                <span class="alert-title">Information</span>
+                <span class="alert-body">This is an info alert with additional details.</span>
+              </div>
             </div>
             <div class="alert alert-success">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
-              <span>This is a success alert.</span>
+              <div class="alert-content">
+                <span class="alert-title">Success</span>
+                <span class="alert-body">Your changes have been saved successfully.</span>
+              </div>
             </div>
             <div class="alert alert-warning">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"/></svg>
-              <span>This is a warning alert.</span>
+              <div class="alert-content">
+                <span class="alert-title">Warning</span>
+                <span class="alert-body">Please review before proceeding.</span>
+              </div>
             </div>
             <div class="alert alert-error">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M165.66,101.66,139.31,128l26.35,26.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
-              <span>This is an error alert.</span>
+              <div class="alert-content">
+                <span class="alert-title">Error</span>
+                <span class="alert-body">Something went wrong. Please try again.</span>
+              </div>
             </div>
           </div>
           <pre class="hidden flex-1 flex items-center" data-code><code>&lt;div class="alert alert-info"&gt;
   &lt;svg&gt;...&lt;/svg&gt;
-  &lt;span&gt;Info message&lt;/span&gt;
+  &lt;div class="alert-content"&gt;
+    &lt;span class="alert-title"&gt;Title&lt;/span&gt;
+    &lt;span class="alert-body"&gt;Body text&lt;/span&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
 
@@ -731,13 +746,13 @@
         'card': { l: 0.99, c: 0.0, h: 250 },
         'ancillary': { l: 0.95, c: 0.01, h: 250 },
         'ancillary-content': { l: 0.18, c: 0.02, h: 250 },
-        'info': { l: 0.45, c: 0.15, h: 230 },
-        'info-content': { l: 0.95, c: 0.05, h: 230 },
-        'success': { l: 0.45, c: 0.15, h: 145 },
-        'success-content': { l: 0.95, c: 0.05, h: 145 },
-        'warning': { l: 0.8, c: 0.15, h: 85 },
-        'warning-content': { l: 0.2, c: 0.05, h: 85 },
-        'error': { l: 0.45, c: 0.18, h: 25 },
+        'info': { l: 0.40, c: 0.12, h: 230 },
+        'info-content': { l: 0.95, c: 0.04, h: 230 },
+        'success': { l: 0.40, c: 0.12, h: 145 },
+        'success-content': { l: 0.95, c: 0.04, h: 145 },
+        'warning': { l: 0.82, c: 0.12, h: 85 },
+        'warning-content': { l: 0.15, c: 0.04, h: 85 },
+        'error': { l: 0.40, c: 0.15, h: 25 },
         'error-content': { l: 0.95, c: 0.05, h: 25 }
       };
 
@@ -809,19 +824,28 @@
       // bg is a color object {l, c, h}, returns lightness value
       // contentC and contentH are the chroma and hue for the content color being generated
       function getContrastingL(bg, preferLight, contentC = 0, contentH = 0) {
+        // Try preferred direction first with extended range
         if (preferLight) {
-          // For dark backgrounds, find light foreground
-          for (let l = 0.98; l >= 0.7; l -= 0.02) {
+          for (let l = 0.98; l >= 0.55; l -= 0.02) {
             if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
           }
-          return 0.98;
         } else {
-          // For light backgrounds, find dark foreground
-          for (let l = 0.10; l <= 0.4; l += 0.02) {
+          for (let l = 0.05; l <= 0.45; l += 0.02) {
             if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
           }
-          return 0.10;
         }
+        // If preferred direction failed, try opposite direction
+        if (preferLight) {
+          for (let l = 0.05; l <= 0.45; l += 0.02) {
+            if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
+          }
+        } else {
+          for (let l = 0.98; l >= 0.55; l -= 0.02) {
+            if (hasGoodContrast({l, c: contentC, h: contentH}, bg)) return l;
+          }
+        }
+        // Fallback (should rarely reach here)
+        return preferLight ? 0.98 : 0.05;
       }
 
       function checkContrast() {
@@ -892,6 +916,36 @@
         'line-height-base': { value: 1.6, unit: '' },
         'paragraph-max-width': { value: 65, unit: 'ch', prefix: 'min(', suffix: ', 100% - 2rem)' }
       };
+
+      function serializeConfig() {
+        const config = {
+          c: Object.fromEntries(Object.entries(colors).map(([k, v]) => [k, [v.l, v.c, v.h]])),
+          v: Object.fromEntries(Object.entries(vars).map(([k, v]) => [k, v.value])),
+          f: document.getElementById('font-family').value
+        };
+        return btoa(JSON.stringify(config));
+      }
+
+      function deserializeConfig(encoded) {
+        const config = JSON.parse(atob(encoded));
+        for (const [name, [l, c, h]] of Object.entries(config.c)) {
+          if (colors[name]) { colors[name].l = l; colors[name].c = c; colors[name].h = h; }
+        }
+        for (const [name, value] of Object.entries(config.v)) {
+          if (vars[name]) vars[name].value = value;
+        }
+        if (config.f) {
+          document.getElementById('font-family').value = config.f;
+          document.body.style.fontFamily = config.f + ', sans-serif';
+        }
+      }
+
+      function updateURL() {
+        const encoded = serializeConfig();
+        const url = new URL(window.location);
+        url.searchParams.set('theme', encoded);
+        history.replaceState(null, '', url);
+      }
 
       function updateCSSVariable(name, value) {
         document.documentElement.style.setProperty(`--el-${name}`, value);
@@ -975,6 +1029,7 @@
   --el-paragraph-max-width: ${varString('paragraph-max-width')};
 }`;
         document.getElementById('config-output').value = config;
+        updateURL();
       }
 
       function initSliders() {
@@ -1083,28 +1138,39 @@
         // 5. Primary - must contrast with background
         colors['primary'].h = primaryHue;
         colors['primary'].c = chroma > 0 ? chroma : 0.15;
+
         // Find a primary lightness that contrasts with background
+        // Search wider range and don't add random offset that could break contrast
         if (isDarkMode) {
-          // Dark bg: primary should be lighter
-          for (let l = 0.6; l <= 0.75; l += 0.05) {
+          colors['primary'].l = 0.65; // Default
+          for (let l = 0.55; l <= 0.80; l += 0.03) {
             if (hasGoodContrast({l, c: colors['primary'].c, h: colors['primary'].h}, colors['background'])) {
-              colors['primary'].l = l + Math.random() * 0.05;
+              colors['primary'].l = l;
               break;
             }
           }
         } else {
-          // Light bg: primary should be darker
-          for (let l = 0.5; l >= 0.35; l -= 0.05) {
+          colors['primary'].l = 0.40; // Default
+          for (let l = 0.50; l >= 0.30; l -= 0.03) {
             if (hasGoodContrast({l, c: colors['primary'].c, h: colors['primary'].h}, colors['background'])) {
-              colors['primary'].l = l - Math.random() * 0.05;
+              colors['primary'].l = l;
               break;
             }
           }
         }
+
+        // Verify primary vs background, reduce chroma if needed (high chroma can cause issues)
+        if (!hasGoodContrast(colors['primary'], colors['background'])) {
+          for (let c = colors['primary'].c; c >= 0.08; c -= 0.02) {
+            colors['primary'].c = c;
+            if (hasGoodContrast(colors['primary'], colors['background'])) break;
+          }
+        }
+
         // Primary content
         colors['primary-content'].c = colors['primary'].c * 0.3;
         colors['primary-content'].h = colors['primary'].h;
-        colors['primary-content'].l = getContrastingL(colors['primary'], colors['primary'].l < 0.5, colors['primary-content'].c, colors['primary-content'].h);
+        colors['primary-content'].l = getContrastingL(colors['primary'], true, colors['primary-content'].c, colors['primary-content'].h);
 
         // 6. Semantic colors - all need contrasting content
         const semanticChroma = paletteOpt === 'monochrome' ? 0.08 : 0.12 + Math.random() * 0.06;
@@ -1112,15 +1178,26 @@
         function setSemanticColor(name, hueBase, hueRange) {
           colors[name].h = hueBase + Math.random() * hueRange;
           colors[name].c = semanticChroma;
-          // Use mid-range lightness that allows for contrasting content
-          colors[name].l = 0.45 + Math.random() * 0.1;
-          // Content color - use accurate contrast check
           const contentC = colors[name].c * 0.3;
           const contentH = colors[name].h;
-          const preferLight = colors[name].l < 0.5;
-          colors[`${name}-content`].l = getContrastingL(colors[name], preferLight, contentC, contentH);
+
+          // Start with darker base (0.35-0.45) which works well with light content
+          colors[name].l = 0.35 + Math.random() * 0.1;
+
+          // Find contrasting content (prefer light for these darker bases)
+          colors[`${name}-content`].l = getContrastingL(colors[name], true, contentC, contentH);
           colors[`${name}-content`].c = contentC;
           colors[`${name}-content`].h = contentH;
+
+          // Verify and adjust base if still not passing
+          if (!hasGoodContrast(colors[`${name}-content`], colors[name])) {
+            // Darken base until it works
+            for (let baseL = colors[name].l; baseL >= 0.25; baseL -= 0.03) {
+              colors[name].l = baseL;
+              colors[`${name}-content`].l = getContrastingL(colors[name], true, contentC, contentH);
+              if (hasGoodContrast(colors[`${name}-content`], colors[name])) break;
+            }
+          }
         }
 
         setSemanticColor('info', 210, 30);
@@ -1130,12 +1207,21 @@
         // Warning is special - needs light bg with dark text
         colors['warning'].h = 75 + Math.random() * 20;
         colors['warning'].c = semanticChroma;
-        colors['warning'].l = 0.75 + Math.random() * 0.1; // Light yellow/orange
+        colors['warning'].l = 0.78 + Math.random() * 0.08; // Light yellow/orange
         const warningContentC = colors['warning'].c * 0.3;
         const warningContentH = colors['warning'].h;
-        colors['warning-content'].l = getContrastingL(colors['warning'], false, warningContentC, warningContentH); // Dark text
+        colors['warning-content'].l = getContrastingL(colors['warning'], false, warningContentC, warningContentH);
         colors['warning-content'].c = warningContentC;
         colors['warning-content'].h = warningContentH;
+
+        // Verify and adjust warning if needed
+        if (!hasGoodContrast(colors['warning-content'], colors['warning'])) {
+          for (let baseL = colors['warning'].l; baseL <= 0.92; baseL += 0.03) {
+            colors['warning'].l = baseL;
+            colors['warning-content'].l = getContrastingL(colors['warning'], false, warningContentC, warningContentH);
+            if (hasGoodContrast(colors['warning-content'], colors['warning'])) break;
+          }
+        }
 
         vars['border-width'].value = Math.floor(Math.random() * 2);
         vars['radius'].value = radius;
@@ -1160,13 +1246,13 @@
           'card': { l: 0.99, c: 0.0, h: 250 },
           'ancillary': { l: 0.95, c: 0.01, h: 250 },
           'ancillary-content': { l: 0.18, c: 0.02, h: 250 },
-          'info': { l: 0.45, c: 0.15, h: 230 },
-          'info-content': { l: 0.95, c: 0.05, h: 230 },
-          'success': { l: 0.45, c: 0.15, h: 145 },
-          'success-content': { l: 0.95, c: 0.05, h: 145 },
-          'warning': { l: 0.8, c: 0.15, h: 85 },
-          'warning-content': { l: 0.2, c: 0.05, h: 85 },
-          'error': { l: 0.45, c: 0.18, h: 25 },
+          'info': { l: 0.40, c: 0.12, h: 230 },
+          'info-content': { l: 0.95, c: 0.04, h: 230 },
+          'success': { l: 0.40, c: 0.12, h: 145 },
+          'success-content': { l: 0.95, c: 0.04, h: 145 },
+          'warning': { l: 0.82, c: 0.12, h: 85 },
+          'warning-content': { l: 0.15, c: 0.04, h: 85 },
+          'error': { l: 0.40, c: 0.15, h: 25 },
           'error-content': { l: 0.95, c: 0.05, h: 25 }
         },
         vars: {
@@ -1185,13 +1271,13 @@
       };
 
       // Semantic colors with guaranteed contrast
-      // L ~0.45 = dark enough for light content (L 0.95)
-      // Warning L 0.8 = light enough for dark content (L 0.2)
+      // L ~0.40 = dark enough for light content (L 0.95)
+      // Warning L 0.82 = light enough for dark content (L 0.15)
       const semanticColors = {
-        'info': { l: 0.45, c: 0.15, h: 230 },
-        'success': { l: 0.45, c: 0.15, h: 145 },
-        'warning': { l: 0.8, c: 0.15, h: 85 },
-        'error': { l: 0.45, c: 0.18, h: 25 }
+        'info': { l: 0.40, c: 0.12, h: 230 },
+        'success': { l: 0.40, c: 0.12, h: 145 },
+        'warning': { l: 0.82, c: 0.12, h: 85 },
+        'error': { l: 0.40, c: 0.15, h: 25 }
       };
 
       const presets = {
@@ -1333,13 +1419,18 @@
           const bg = colors[baseName];
           const contentName = `${baseName}-content`;
           if (!preset.colors[contentName]) {
-            // Warning always gets dark text, others depend on background lightness
-            const preferLight = baseName === 'warning' ? false : (bg.l < 0.5);
+            // Warning gets dark text (light bg), others get light text (dark bg)
+            const preferLight = baseName === 'warning' ? false : true;
             const contentC = bg.c * 0.3;
             const contentH = bg.h;
             colors[contentName].l = getContrastingL(bg, preferLight, contentC, contentH);
             colors[contentName].c = contentC;
             colors[contentName].h = bg.h;
+
+            // Verify and log if still failing (presets should be designed to work)
+            if (!hasGoodContrast(colors[contentName], bg)) {
+              console.warn(`Preset ${name}: ${baseName} contrast may be insufficient`);
+            }
           }
         }
         ensureContentColor('primary');
@@ -1391,7 +1482,8 @@
           if (['primary', 'info', 'success', 'warning', 'error'].includes(colorName)) {
             const bg = colors[colorName];
             const content = colors[`${colorName}-content`];
-            const preferLight = colorName === 'warning' ? false : (bg.l < 0.5);
+            // Warning gets dark text, others get light text
+            const preferLight = colorName === 'warning' ? false : true;
             const contentC = bg.c * 0.3;
             const contentH = bg.h;
             content.l = getContrastingL(bg, preferLight, contentC, contentH);
@@ -1470,7 +1562,26 @@
         });
       });
 
-      // Initialize
+      // Load from URL if present
+      const urlParams = new URLSearchParams(window.location.search);
+      const themeParam = urlParams.get('theme');
+      if (themeParam) {
+        try { deserializeConfig(themeParam); } catch (e) { console.warn('Invalid theme param'); }
+      }
+
+      // Initialize - apply all colors and vars to DOM
+      for (const [name, color] of Object.entries(colors)) {
+        updateCSSVariable(name, oklchString(color.l, color.c, color.h));
+      }
+      for (const name of Object.keys(vars)) {
+        const v = vars[name];
+        const val = varString(name);
+        if (name === 'shadow-opacity') {
+          updateCSSVariable('shadow-color', `oklch(0 0 0 / ${v.value})`);
+        } else {
+          updateCSSVariable(name, val);
+        }
+      }
       initSliders();
       updateConfig();
       checkContrast();
